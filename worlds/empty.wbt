@@ -1,0 +1,569 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/kuka/youbot/protos/Youbot.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/mir/mir100/protos/Mir100UltrasonicSensor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Roughcast.proto"
+
+WorldInfo {
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        0, 2, 0
+      ]
+      frictionRotation -0.785398 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        0, 2, 0
+      ]
+      frictionRotation 0.785398 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.2746662149821582 -0.3721611049207394 -0.8865971928285975 4.919395802611822
+  position -5.170833190625478 -11.58911067433742 7.611425272715642
+  followType "Pan and Tilt Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 0.05
+  name "rectangle arena(1)"
+  floorSize 10 10
+  floorAppearance Appearance {
+    texture ImageTexture {
+      url [
+        "../../../Battle area3.png"
+      ]
+    }
+    textureTransform TextureTransform {
+      scale 0.05 0.05
+    }
+  }
+}
+Youbot {
+  translation 1.21317 -2.01608 0.132164
+  rotation 0.005937001627789151 -0.009176062515865072 -0.9999402741606005 -1.4740553071795865
+  name "KOKI1"
+  controller "line_follow_v1"
+  bodySlot [
+    DistanceSensor {
+      translation 0.23 0.01 -0.04
+      name "if1"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0 -0.04
+      name "if2"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.04
+      name "if3"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if4"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if5"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.1 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if6"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.23 0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if7"
+    }
+    DistanceSensor {
+      translation -0.23 0 -0.02
+      rotation 0 0 1 3.14159
+      name "if8"
+    }
+    DistanceSensor {
+      translation -0.23 -0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if9"
+    }
+    DistanceSensor {
+      translation -0.1 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if10"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if11"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if12"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.03
+      rotation 0 0 1 0.7854000000000001
+      name "if13"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    Lidar {
+      translation 0.27 0 -0.09
+      numberOfLayers 1
+    }
+    Mir100UltrasonicSensor {
+      translation 0.28 -0.01 -0.074
+      name "ultrasonic_sensor"
+      lookupTable [
+        0.01 995 0
+        0.35 0 0
+      ]
+    }
+    Camera {
+      translation 0.28 0 -0.04
+      recognition Recognition {
+        frameThickness 3
+      }
+    }
+    DistanceSensor {
+      translation 0.266 0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir1"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.266 -0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir12"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir2"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 -0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir11"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir3"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 -0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir10"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2772 0.066 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir4"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2808 0.05 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir5"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2817 0.025 -0.0864086
+      rotation 0 1 0 1.507
+      name "ir6"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2818 -0.004 -0.0857775
+      rotation 0 1 0 1.507
+      name "ir7"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.282 -0.034 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir8"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.276 -0.066 -0.0876836
+      rotation 0 1 0 1.507
+      name "ir9"
+      type "infra-red"
+    }
+  ]
+}
+Youbot {
+  translation -1.19265 -2.26496 0.245143
+  rotation 0.005937001627789151 -0.009176062515865072 -0.9999402741606005 -1.4740553071795865
+  name "KOKI2"
+  controller "line_follow_v1"
+  bodySlot [
+    DistanceSensor {
+      translation 0.23 0.01 -0.04
+      name "if1"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0 -0.04
+      name "if2"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.04
+      name "if3"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if4"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if5"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.1 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if6"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.23 0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if7"
+    }
+    DistanceSensor {
+      translation -0.23 0 -0.02
+      rotation 0 0 1 3.14159
+      name "if8"
+    }
+    DistanceSensor {
+      translation -0.23 -0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if9"
+    }
+    DistanceSensor {
+      translation -0.1 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if10"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if11"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if12"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.03
+      rotation 0 0 1 0.7854000000000001
+      name "if13"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    Lidar {
+      translation 0.27 0 -0.09
+      numberOfLayers 1
+    }
+    Mir100UltrasonicSensor {
+      translation 0.28 -0.01 -0.074
+      name "ultrasonic_sensor"
+      lookupTable [
+        0.01 995 0
+        0.35 0 0
+      ]
+    }
+    Camera {
+      translation 0.28 0 -0.04
+      recognition Recognition {
+        frameThickness 3
+      }
+    }
+    DistanceSensor {
+      translation 0.266 0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir1"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.266 -0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir12"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir2"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 -0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir11"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir3"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 -0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir10"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2772 0.066 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir4"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2808 0.05 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir5"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2817 0.025 -0.0864086
+      rotation 0 1 0 1.507
+      name "ir6"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2818 -0.004 -0.0857775
+      rotation 0 1 0 1.507
+      name "ir7"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.282 -0.034 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir8"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.276 -0.066 -0.0876836
+      rotation 0 1 0 1.507
+      name "ir9"
+      type "infra-red"
+    }
+  ]
+}
+Wall {
+  translation 0 0.5 0.1
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 3.5 0.1
+  name "wall(5)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 2.5 0.1
+  name "wall(6)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 1.5 0.1
+  name "wall(7)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 4.5 0.1
+  name "wall(1)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 -0.5 0.1
+  name "wall(2)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 -1.5 0.1
+  name "wall(3)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 -2.5 0.1
+  name "wall(4)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 -3.5 0.1
+  name "wall(8)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation 0 -4.5 0.1
+  name "wall(9)"
+  size 0.38 1 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
