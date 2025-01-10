@@ -1,6 +1,9 @@
 from controller import Robot
+<<<<<<< HEAD
 from collections import deque
 import numpy as np
+=======
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
 import math
 
 class RobotController(Robot):
@@ -22,12 +25,19 @@ class RobotController(Robot):
             wheel.setVelocity(0)
 
         self.max_velocity = 14.81
+<<<<<<< HEAD
         self.movement_velocity = 4.0  # تقليل السرعة
         self.movement_velocity = 6.28  
 
         # Setup for sensors
         self.road_map = ["forward", "left", "forward", "right", "forward"]  # Example road map
         self.current_step = 0 
+=======
+        self.MOVEMENT_VELOCITY = 12
+        self.movement_velocity = 6.28  
+
+        # Setup for sensors
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
         self.sensors_index = [1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12]
         self.sensors = []
         self.sensors_coefficient = [5000,4500,4000, 3000, 2000, 1000, -1000, -2000, -3000, -4000,-4500,-5000]
@@ -66,8 +76,13 @@ class RobotController(Robot):
         self.fingerMaxPosition = self.finger1.getMaxPosition()
         
         # PID coefficients
+<<<<<<< HEAD
         self.Kp = 0.001
         self.Kd = 0.0002 
+=======
+        self.Kp = 0.0015
+        self.Kd = 0.00015 
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
         self.last_error = 0
         # PID error terms
 
@@ -95,6 +110,7 @@ class RobotController(Robot):
             sensor.enable(self.timestep)
             self.wall_sensors.append(sensor)  
         # Set initial values for control variables
+<<<<<<< HEAD
         self.turn_duration = 500  # Placeholder: the duration of a turn (to be calibrated)
         self.turn_around_duration = 3000  # Placeholder: the duration of a 180-degree turn (to be calibrated)
         self.step(self.timestep)
@@ -194,6 +210,53 @@ class RobotController(Robot):
         return self.calculate_distance(target_position)
 
 
+=======
+        self.turn_duration = 1500  # Placeholder: the duration of a turn (to be calibrated)
+        self.turn_around_duration = 3000  # Placeholder: the duration of a 180-degree turn (to be calibrated)
+        self.step(self.timestep)
+
+    def navigate_maze(self):
+        while self.step(self.timestep) != -1:
+            action, position, distance = self.detect_box()
+            distance_x , distance_y ,distance_z = self.detect_red_floor()
+            print("Start Take Direction")
+            if action == 'change_direction':
+               print("change_direction")
+               self.avoid_obstacle(position, distance)
+            elif action == 'go_and_catch' and distance > 0.04:
+                  print("go_and_catch")
+                  if (self.pickup_state != 'idle') and (self.detected_box_color[1] != 1):
+                        print("pickup_state")
+                        self.approach_box(position, distance)
+                        print(f"distance_x :{distance_x} distance_y:{distance_y} distance_z:{distance_z}" )
+            elif distance_x <= 0.08:
+                            self.halt()
+                            self.rev_take_box_from_back()
+                            self.rev_take_box_from_back()
+                            break             
+            else:
+                # if not self.is_path_right() and not self.is_path_left() and self.is_wall_corner():
+                    # print("turn_around")
+                    # self.rotate(math.pi)  # Rotate 180 degrees        
+                if self.is_wall_corner():
+                    print("corner_turn_left")
+                    self.rotate(-math.pi / 2)  # Rotate 90 degrees to the left
+                    self.move_forward(self.MOVEMENT_VELOCITY)
+                elif self.is_path_right():
+                    print("turn_right")
+                    self.rotate(-math.pi / 2)  # Rotate 90 degrees to the left
+                    self.move_forward(self.MOVEMENT_VELOCITY)
+                elif self.is_path_forward():
+                    print("move_forward")
+                    self.move_forward(self.MOVEMENT_VELOCITY)
+                elif self.is_path_left():
+                    print("turn_left")
+                    self.rotate(math.pi / 2)  # Rotate 90 degrees to the right
+                    self.move_forward(self.MOVEMENT_VELOCITY)
+                else:
+                    print("turn_around")
+                    self.rotate(math.pi)  # Rotate 180 degrees
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
     def rotate(self, angle):
         # Rotate the robot by a specified angle (in radians)
         rotation_speed = self.turn_speed if angle > 0 else -self.turn_speed
@@ -310,11 +373,18 @@ class RobotController(Robot):
     def read_sensors_value(self):
         value = 0
         for index, sensor in enumerate(self.sensors):
+<<<<<<< HEAD
             #print(f"Sensor {index + 1} value: {sensor.getValue()}")
             sensor_value = sensor.getValue()
             # Debug print for each sensor value
             # print(f"Sensor {index + 1}: {sensor_value}")  
             if 300 <= sensor_value <= 550:
+=======
+            sensor_value = sensor.getValue()
+            # Debug print for each sensor value
+            # print(f"Sensor {index + 1}: {sensor_value}")  
+            if sensor_value > 200:
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
                 value += self.sensors_coefficient[index]
         return value
 
@@ -361,6 +431,7 @@ class RobotController(Robot):
                         # COUNTER_PICKK_UP=COUNTER_PICKK_UP+1
                               return 'go_and_catch', position, distance 
         return 'no_box', 0, float("inf")  
+<<<<<<< HEAD
     def get_target_position(self):
         objects = self.camera.getRecognitionObjects()
         for obj in objects:
@@ -393,6 +464,18 @@ class RobotController(Robot):
         P = self.Kp * error
         D = self.Kd * error_rate
         self.last_error = error
+=======
+    def line_follow(self):
+        goal = 0
+        reading = self.read_sensors_value()
+        # print(f"reading is{reading}")
+        error = goal - reading
+        P = self.Kp * error
+
+        error_rate = error - self.last_error
+        self.last_error = error
+        D = self.Kd * error_rate
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
         # Print the P and D values for debugging
         # print(f"P value: {P}")
         # print(f"D value: {D}")
@@ -401,6 +484,7 @@ class RobotController(Robot):
         left_speed = self.movement_velocity / 2 - steering_correction
         right_speed = self.movement_velocity / 2 + steering_correction
         self.steering(left_speed, right_speed)
+<<<<<<< HEAD
 
         if self.detect_waypoint():
             print("Waypoint detected.")
@@ -448,6 +532,13 @@ class RobotController(Robot):
                 break
                 
     
+=======
+        marker_detected = self.detect_gate_marker()
+        if marker_detected:
+            print("Switch To Navigate Maze")
+            return True  # Indicate that the gate has been detected
+        return False  # Indicate that the gate has not been detected
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
 
     def detect_gate_marker(self):
         objects = self.camera.getRecognitionObjects()
@@ -724,6 +815,7 @@ class RobotController(Robot):
         print("fold_arms")
         self.rev_fold_arms()
 
+<<<<<<< HEAD
     def turn_left(self, speed):
         self.set_wheel_speeds(-speed, speed, -speed, speed)
         self.step(int(self.turn_duration))  # Adjust turn_duration for proper alignment
@@ -777,11 +869,15 @@ class RobotController(Robot):
 
         # Print the queue of detected colors
         print(f"Queue of Detected Colors: {list(self.detected_color_queue)}")
+=======
+
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
 
 
 
     def loop(self):
         while self.step(self.timestep) != -1:
+<<<<<<< HEAD
             self.process_camera_image()
             if self.current_step >= len(self.road_map):
                 print("Road map completed. Stopping.")
@@ -814,6 +910,24 @@ class RobotController(Robot):
                 #         print("Start Navigate Maze")
                 #         self.navigate_maze()
                 #         break
+=======
+        #   self.move_forward(2)
+            # self.COUNTER_REV_PICKK_UP+=1       
+                action, position, distance = self.detect_box()
+                if action == 'change_direction':
+                    print("change_direction")
+                    self.avoid_obstacle(position, distance)
+                elif action == 'go_and_catch' :
+                    print("go_and_catch")
+                    if (self.pickup_state != 'idle') and (self.detected_box_color[1] != 1):
+                        print("pickup_state")
+                        self.approach_box(position, distance)
+                else:
+                     if self.line_follow() ==  True:  # If line_follow returns True, gate marker is detected
+                        print("Start Navigate Maze")
+                        self.navigate_maze()
+                        break
+>>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
 
                         # break  # Break out of the loop after navigating the maze
 # After navigating the maze, you might want to end the loop
