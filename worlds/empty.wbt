@@ -22,11 +22,7 @@ WorldInfo {
       ]
     }
     ContactProperties {
-<<<<<<< HEAD
       material1 "ExteriorWheelMat"
-=======
-      material1 "InteriorWheelMat"
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       coulombFriction [
         0, 2, 0
       ]
@@ -39,18 +35,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-<<<<<<< HEAD
   orientation 0.32814049531656725 -0.3235270000402154 -0.8874987862405088 4.5997631679335536
   position -0.056756345084971786 -15.777346774748858 13.125345391651562
-=======
-<<<<<<< HEAD
-  orientation 0.08509996602572453 0.9125938670534115 -0.39991302754339086 0.526495997939232
-  position -6.832774814657631 0.023425095672641394 3.7091356797206463
-=======
-  orientation 0.26844745102900147 -0.3894601248290632 -0.881054355419779 4.980656047263201
-  position -5.660037204754174 -13.358484850026292 8.863408084282248
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -64,11 +50,7 @@ RectangleArena {
   floorAppearance Appearance {
     texture ImageTexture {
       url [
-<<<<<<< HEAD
         "Battle area3.png"
-=======
-        "../../../Battle area3.png"
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       ]
     }
     textureTransform TextureTransform {
@@ -76,14 +58,8 @@ RectangleArena {
     }
   }
 }
-<<<<<<< HEAD
 Solid {
   translation -1.17 -1.1 0.051
-=======
-<<<<<<< HEAD
-Solid {
-  translation -1.17 -0.85 0.051
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   children [
     Shape {
       appearance Appearance {
@@ -94,18 +70,13 @@ Solid {
         }
       }
       geometry Plane {
-<<<<<<< HEAD
         size 0.05 0.05
-=======
-        size 0.025 0.025
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       }
     }
   ]
   name "Red"
 }
 Solid {
-<<<<<<< HEAD
   translation 1.16 -1.03 0.051
   children [
     Shape {
@@ -161,9 +132,6 @@ Solid {
 }
 Solid {
   translation -1.17 -0.36 0.051
-=======
-  translation -1.17 -1.05 0.051
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   children [
     Shape {
       appearance Appearance {
@@ -174,18 +142,13 @@ Solid {
         }
       }
       geometry Plane {
-<<<<<<< HEAD
         size 0.05 0.05
-=======
-        size 0.025 0.025
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       }
     }
   ]
   name "Blue"
 }
 Solid {
-<<<<<<< HEAD
   translation 1.16 -0.79 0.051
   children [
     Shape {
@@ -313,9 +276,6 @@ Solid {
 }
 Solid {
   translation -4.21 -4.09 0.051
-=======
-  translation -1.17 -0.51 0.051
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   children [
     Shape {
       appearance Appearance {
@@ -326,7 +286,6 @@ Solid {
         }
       }
       geometry Plane {
-<<<<<<< HEAD
         size 1.6 1.6
       }
     }
@@ -389,16 +348,6 @@ Solid {
 }
 Solid {
   translation -1.17 -0.88 0.051
-=======
-        size 0.025 0.025
-      }
-    }
-  ]
-  name "Green"
-}
-Solid {
-  translation -1.17 -0.66 0.051
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   children [
     Shape {
       appearance Appearance {
@@ -409,17 +358,12 @@ Solid {
         }
       }
       geometry Plane {
-<<<<<<< HEAD
         size 0.05 0.05
-=======
-        size 0.025 0.025
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       }
     }
   ]
   name "Yellow"
 }
-<<<<<<< HEAD
 Solid {
   translation 1.17 -0.27 0.051
   children [
@@ -452,40 +396,6 @@ Youbot {
     GPS {
       accuracy 0.01
     }
-=======
-Youbot {
-  hidden translation_30 0 0 0.077
-  hidden rotation_30 0 0 1 5.405651672845218e-07
-  hidden translation_31 0.033 0 0.07
-  hidden rotation_31 0 0.9999999999999999 0 2.1900144899933154e-07
-  hidden translation_32 0 0 0.155
-  hidden rotation_32 0 1 0 3.39798755973321e-07
-  hidden translation_33 0 0 0.135
-  hidden rotation_33 0 -1 0 0
-  hidden translation_34 0 0 0.081
-  hidden rotation_34 0 0 1 0
-  hidden translation_35 0 5.104939011827844e-10 0.09
-  hidden rotation_35 1 0 0 4.71239
-  hidden translation_36 0 -4.75461482316335e-10 0.09
-  hidden rotation_36 0 -0.7071067811865476 0.7071067811865476 3.14159
-  hidden translation_37 0.228 -0.158 -0.055
-  hidden rotation_37 0 1 0 0.33301009334676973
-  hidden translation_38 0.228 0.158 -0.055
-  hidden rotation_38 0 1 0 2.21336164913174
-  hidden translation_39 -0.228 -0.158 -0.055
-  hidden rotation_39 0 1 0 0.3427633480192099
-  hidden translation_40 -0.228 0.158 -0.055
-  hidden rotation_40 0 1 0 2.5790955200056436
-  translation -1.14129 -2.09477 0.155367
-  rotation -0.0021625515651156023 0.0020567677300412615 0.9999955465286998 1.5819113004328902
-=======
-Youbot {
-  translation 1.21317 -2.01608 0.132164
-  rotation 0.005937001627789151 -0.009176062515865072 -0.9999402741606005 -1.4740553071795865
-  name "KOKI1"
-  controller "line_follow_v1"
-  bodySlot [
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
     DistanceSensor {
       translation 0.23 0.01 -0.04
       name "if1"
@@ -601,13 +511,9 @@ Youbot {
       ]
     }
     Camera {
-<<<<<<< HEAD
       translation 0.28 -0.01 -0.0799993
       rotation 0 1 0 1.5708
       fieldOfView 0.8
-=======
-      translation 0.28 0 -0.04
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       recognition Recognition {
         frameThickness 3
       }
@@ -687,7 +593,6 @@ Youbot {
   ]
 }
 Youbot {
-<<<<<<< HEAD
   translation 1.16498 -2.05644 0.153232
   rotation 0 0 1 1.5708
   name "KuKa_2"
@@ -701,14 +606,6 @@ Youbot {
     GPS {
       accuracy 0.01
     }
-=======
-  translation -1.19265 -2.26496 0.245143
-  rotation 0.005937001627789151 -0.009176062515865072 -0.9999402741606005 -1.4740553071795865
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
-  name "KOKI2"
-  controller "line_follow_v1"
-  bodySlot [
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
     DistanceSensor {
       translation 0.23 0.01 -0.04
       name "if1"
@@ -824,19 +721,9 @@ Youbot {
       ]
     }
     Camera {
-<<<<<<< HEAD
       translation 0.28 -0.01 -0.0799993
       rotation 0 1 0 1.5708
       fieldOfView 0.8
-=======
-<<<<<<< HEAD
-      translation 0.28 -0.01 -0.0799993
-      rotation 0 1 0 1.5708
-      fieldOfView 0.8
-=======
-      translation 0.28 0 -0.04
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
       recognition Recognition {
         frameThickness 3
       }
@@ -916,16 +803,8 @@ Youbot {
   ]
 }
 Wall {
-<<<<<<< HEAD
   translation 0 0 0.045
   size 0.38 10 0.4
-=======
-<<<<<<< HEAD
-  translation 2.4 3.26 0.1
-=======
-  translation 0 0.5 0.1
-  size 0.38 1 0.4
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
   appearance Roughcast {
     colorOverride 0 0 0
     textureTransform TextureTransform {
@@ -933,7 +812,6 @@ Wall {
     }
   }
 }
-<<<<<<< HEAD
 Solid {
   translation -1.17 -0.67 0.05
   children [
@@ -1646,120 +1524,3 @@ Solid {
     0 0 1
   ]
 }
-=======
-Wall {
-  translation 0 3.5 0.1
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
-  name "wall(5)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-<<<<<<< HEAD
-  translation -3.4 3.78 0.1
-=======
-  translation 0 2.5 0.1
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
-  name "wall(6)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-<<<<<<< HEAD
-  translation -3.35 1.5 0.1
-=======
-  translation 0 1.5 0.1
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
-  name "wall(7)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-<<<<<<< HEAD
-  translation -3.38 -4.29 0.1
-=======
-  translation 0 4.5 0.1
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
-  name "wall(1)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-<<<<<<< HEAD
-=======
-Wall {
-  translation 0 -0.5 0.1
-  name "wall(2)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-  translation 0 -1.5 0.1
-  name "wall(3)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-  translation 0 -2.5 0.1
-  name "wall(4)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-  translation 0 -3.5 0.1
-  name "wall(8)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
-Wall {
-  translation 0 -4.5 0.1
-  name "wall(9)"
-  size 0.38 1 0.4
-  appearance Roughcast {
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-      scale 2.4 1
-    }
-  }
-}
->>>>>>> 5eb0d570632cdb4bc6a07f016fa7c45759e525ec
->>>>>>> 1c93a9aca767828fd6e12460e7e567e07b3bef3a
