@@ -1,0 +1,10 @@
+# Webots temporary and log files
+*.bak
+*.log
+*.tmp
+*.old
+.cache/
+
+# Ignore backup and build directories
+backup/
+build/
