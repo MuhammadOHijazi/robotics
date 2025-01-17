@@ -217,14 +217,20 @@ class RobotController(Robot):
     def move_backward(self, speed):
         self.set_motor_velocity(-speed, -speed, -speed, -speed)
 
-    def set_motor_velocity(self, left_velocity, right_velocity):
+    def set_motor_rotation_velocity(self, left_velocity, right_velocity):
         self.front_left_motor.setVelocity(left_velocity)
         self.back_left_motor.setVelocity(left_velocity)
         self.front_right_motor.setVelocity(right_velocity)
         self.back_right_motor.setVelocity(right_velocity)
 
+    def set_motor_velocity(self, front_left, front_right, back_left, back_right):
+        self.front_left_motor.setVelocity(front_left)
+        self.front_right_motor.setVelocity(front_right)
+        self.back_left_motor.setVelocity(back_left)
+        self.back_right_motor.setVelocity(back_right)
+
     def stop_motors(self):
-        self.set_motor_velocity(0.0, 0.0)
+        self.set_motor_velocity(0.0, 0.0,0.0,0.0)
 
     # get current angle 
     def get_current_angle(self):
@@ -257,9 +263,9 @@ class RobotController(Robot):
 
                 # Determine direction of rotation
                 if angle_difference <= 180:
-                    self.set_motor_velocity(self.rotation_velocity, -self.rotation_velocity)
+                    self.set_motor_rotation_velocity(self.rotation_velocity, -self.rotation_velocity)
                 else:
-                    self.set_motor_velocity(-self.rotation_velocity, self.rotation_velocity)
+                    self.set_motor_rotation_velocity(-self.rotation_velocity, self.rotation_velocity)
 
                 # Step simulation
                 if self.step(self.timestep) == -1:
@@ -345,7 +351,6 @@ class RobotController(Robot):
             self.wait_for_sensors(10)
             time.sleep(1)
 
-
     def go_to_blue(self):
         self.wait_for_sensors(10)
         time.sleep(1)
@@ -381,7 +386,6 @@ class RobotController(Robot):
         self.turn_right_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
-
 
     def go_to_green(self):
         self.wait_for_sensors(10)
@@ -422,9 +426,9 @@ class RobotController(Robot):
             self.finger2.setPosition(self.fingerMaxPosition)
             print("lower arm")
             self.step(100 * self.timestep) 
-            self.armMotors[1].setPosition(-1.13)
-            self.armMotors[2].setPosition(-1.10)
-            self.armMotors[3].setPosition(-1.35)
+            self.armMotors[1].setPosition(-1.10)
+            self.armMotors[2].setPosition(-1.00)
+            self.armMotors[3].setPosition(-1.10)
             print("close gripper")
             self.step(100 * self.timestep)  
             self.finger1.setPosition(0.013)  
@@ -450,11 +454,12 @@ class RobotController(Robot):
             self.step(50 * self.timestep)
             # raise the hand a little bit to move freely without touch it
             self.armMotors[1].setPosition(0.30)
-            self.step(50 * self.timestep)
+            self.step(100 * self.timestep)
+            self.hand_up()
+            self.step(100 * self.timestep)
             print("return To start Position")
             self.COUNTER_PICKK_UP += 1 
-            self.hand_up()
-
+            
     def pick_green_and_retrun_to_node(self):
         self.pick_up()
         time.sleep(1)
@@ -478,7 +483,7 @@ class RobotController(Robot):
         self.turn_left_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
-        while self.step(self.timestep) != -1 and self.current_y <-0.0:
+        while self.step(self.timestep) != -1 and self.current_y <= 0.0:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
             self.move_forward(self.max_velocity)
@@ -532,57 +537,104 @@ class RobotController(Robot):
         # return the to the basic place
         self.hand_up()
 
-    def go_to_picK_first_red_box(self):
+    def move_left(self, speed):
+        self.set_motor_velocity(-speed, speed, speed, -speed)
+
+    def move_right(self, speed):
+        self.set_motor_velocity(speed, -speed, -speed, speed)
+
+    def move_to_correct_x_position(self, target_x, speed = 1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            print(f"Current Position: ({self.current_x}, {self.current_y})")
+            diff_x = target_x - self.current_x
+
+            if abs(diff_x) < 0.001:  # Threshold for precision
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                break
+            print(f'diff_x {diff_x}')
+            if abs(diff_x) >= 0.001: 
+                if diff_x > 0:
+                    print("Moving forward to align X")
+                    self.move_backward(speed)  
+                   
+                else:
+                    print("Moving backward to align X")
+                    self.move_forward(speed)  
+            else:
+                self.stop_movement()
+                self.stop_robot() 
+                self.stop_motors()
+
+            self.wait_for_sensors(10)
+
+    def move_to_correct_y_position(self, target_y, speed=1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            diff_y = target_y - self.current_y
+            if abs(diff_y) < 0.001:  
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                break
+            print(f'diff_y {diff_y}')
+            if abs(diff_y) >= 0.001:  
+                if diff_y > 0:
+                    print("Moving right to align Y")
+                    self.move_left(speed) 
+                else:
+                    print("Moving left to align Y")
+                    self.move_right(speed) 
+            else:
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                
+    def move_to_position(self, target_x, target_y, speed=1.0):
+        self.move_to_correct_x_position(target_x,speed)
+        time.sleep(0.5)
+        self.move_to_correct_y_position(target_y,speed)
+
+    def return_from_red_to_node(self):
+        time.sleep(1)
+        self.wait_for_sensors(10)
+        self.turn_left_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
-        while self.step(self.timestep) != -1 and self.current_x >= -3.3150000:
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+        print('finish Turning')
+        self.get_gps_position()
+        time.sleep(1)
+        while self.step(self.timestep) != -1 and self.current_x <-2.45:
             self.get_gps_position()
-            print(f'Current X: {self.current_x}')
-            self.move_forward(0.50)
+            print(f'Current x: {self.current_x}')
+            self.move_forward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        time.sleep(1)
+        self.turn_right_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+        while self.step(self.timestep) != -1 and self.current_y >= 0.0:
             self.get_gps_position()
+            print(f'Current Y: {self.current_y}')
+            self.move_forward(self.max_velocity)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
         time.sleep(1)
-
-    # def move_left(self, speed=1.0):
-    #     self.set_motor_velocity(-speed, speed, speed, -speed)
-
-    # def move_right(self, speed=1.0):
-    #     self.set_motor_velocity(speed, -speed, -speed, speed)
-
-    # def move_to_position(self, target_x, target_y, speed=2.0):
-    #     while True:
-    #         self.step()
-            
-    #         print(f"Current Position: ({self.current_x}, {self.current_y})")
-    #         # Calculate differences
-    #         diff_x = target_x - self.current_x
-    #         diff_y = target_y - self.current_y
-
-    #         # إذا كان الفرق في المحورين أقل من العتبة، أوقف الروبوت
-    #         if abs(diff_x) < 0.01 and abs(diff_y) < 0.001:  # Threshold for precision
-    #             print("Arrived at target position!")
-    #             self.stop()
-    #             break
-
-    #         # حركة الروبوت على المحور X
-    #         if abs(diff_x) >= 0.01:  # إذا كان الفرق كبيرًا على المحور X
-    #             if diff_x > 0:
-    #                 self.move_forward(speed)  # التحرك للأمام
-    #             else:
-    #                 self.move_backward(speed)  # الرجوع للخلف
-    #         else:
-    #             self.stop()  # أوقف الحركة على المحور X
-
-    #         # حركة الروبوت على المحور Y
-    #         if abs(diff_y) >= 0.01:  # إذا كان الفرق كبيرًا على المحور Y
-    #             if diff_y > 0:
-    #                 self.move_right(speed)  # التحرك لليمين
-    #             else:
-    #                 self.move_left(speed)  # التحرك لليسار
-    #         else:
-    #             self.stop()  # أوقف الحركة على المحور Y
 
 
 robot = RobotController()
@@ -593,21 +645,23 @@ for color in robot.color_queue:
     if color == 'Red':
         print("\nThe Color Is Now RED\n")
         robot.go_to_red()
-        # robot.go_to_picK_first_red_box()
-        # # robot.move_to_position(target_x = -3.30032, target_y = 3.76234)
-        # robot.pick_up()
-    elif color == 'Blue':
-        print("\nThe Color Is Now Blue\n")
-        robot.go_to_blue()
-    elif color == 'Green':
-        print("\nThe Color Is Now Green \n")
-        robot.go_to_green()
-    elif color == 'Yellow':
-        print("\nThe Color Is Now Yellow \n")
-        robot.go_to_yellow()
-    else:
-        print('\nTheere is no Colors detect Bro\n')
-        break
+        time.sleep(1)
+        robot.move_to_position(target_x = -3.30032, target_y = 3.76234)
+        robot.pick_up()
+        robot.return_from_red_to_node()
+        
+    # elif color == 'Blue':
+    #     print("\nThe Color Is Now Blue\n")
+    #     robot.go_to_blue()
+    # elif color == 'Green':
+    #     print("\nThe Color Is Now Green \n")
+    #     robot.go_to_green()
+    # elif color == 'Yellow':
+    #     print("\nThe Color Is Now Yellow \n")
+    #     robot.go_to_yellow()
+    # else:
+    #     print('\nTheere is no Colors detect Bro\n')
+    #     break
     
 
 

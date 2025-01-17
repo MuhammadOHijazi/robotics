@@ -35,8 +35,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.32814049531656725 -0.3235270000402154 -0.8874987862405088 4.5997631679335536
-  position -0.056756345084971786 -15.777346774748858 13.125345391651562
+  orientation -0.33754666598630084 0.33241309649589124 0.8806609912784522 1.6928161012312153
+  position 0.5054398378341182 -7.435155976117645 5.229267749926888
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -383,8 +383,30 @@ Solid {
   name "Yellow(1)"
 }
 Youbot {
-  translation -1.17477 -2.04883 0.151811
-  rotation 0 0 1 1.5708
+  hidden translation_32 0 0 0.077
+  hidden rotation_32 0 0 1 0
+  hidden translation_33 0.033 0 0.07
+  hidden rotation_33 0 1 0 2.9802322387695313e-08
+  hidden translation_34 0 0 0.155
+  hidden rotation_34 0 -1 0 0
+  hidden translation_35 0 0 0.135
+  hidden rotation_35 0 -1 0 0
+  hidden translation_36 0 0 0.081
+  hidden rotation_36 0 0 1 0
+  hidden translation_37 0 0.025000000024066577 0.09
+  hidden rotation_37 1 0 0 4.71239
+  hidden translation_38 0 -0.02499999997593376 0.09
+  hidden rotation_38 0 -0.7071067811865476 0.7071067811865476 3.14159
+  hidden translation_39 0.228 -0.158 -0.055
+  hidden rotation_39 0 1 0 4.849182121590965
+  hidden translation_40 0.228 0.158 -0.055
+  hidden rotation_40 0 1 0 4.262787238591622
+  hidden translation_41 -0.228 -0.158 -0.055
+  hidden rotation_41 0 1 0 4.849332515087192
+  hidden translation_42 -0.228 0.158 -0.055
+  hidden rotation_42 0 1 0 4.262982449036864
+  translation -1.1750538219855464 -2.048146792889991 0.14887348236528225
+  rotation -0.0021642406130696176 0.0020827661301494335 0.9999954890637335 1.5707942750081794
   name "KuKa"
   controller "line_follow_v1"
   bodySlot [
@@ -593,8 +615,30 @@ Youbot {
   ]
 }
 Youbot {
-  translation 1.16498 -2.05644 0.153232
-  rotation 0 0 1 1.5708
+  hidden translation_32 0 0 0.077
+  hidden rotation_32 0 0 1 0
+  hidden translation_33 0.033 0 0.07
+  hidden rotation_33 0 -1 0 4.2774379534743284e-07
+  hidden translation_34 0 0 0.155
+  hidden rotation_34 0 -1 0 6.697238997889858e-07
+  hidden translation_35 0 0 0.135
+  hidden rotation_35 0 -1 0 0
+  hidden translation_36 0 0 0.081
+  hidden rotation_36 0 0 1 0
+  hidden translation_37 0 4.7909745935928316e-11 0.09
+  hidden rotation_37 1 0 0 4.71239
+  hidden translation_38 0 2.430951303076387e-11 0.09
+  hidden rotation_38 0 -0.7071067811865476 0.7071067811865476 3.14159
+  hidden translation_39 0.228 -0.158 -0.055
+  hidden rotation_39 0 1 0 0
+  hidden translation_40 0.228 0.158 -0.055
+  hidden rotation_40 0 1 0 0
+  hidden translation_41 -0.228 -0.158 -0.055
+  hidden rotation_41 0 1 0 0
+  hidden translation_42 -0.228 0.158 -0.055
+  hidden rotation_42 0 1 0 0
+  translation 1.1649714588117792 -2.0559940627388715 0.1488734791713149
+  rotation -0.0021641699405449914 0.0020828318853603396 0.9999954890797287 1.570804540588867
   name "KuKa_2"
   controller "line_follow_v2"
   bodySlot [
@@ -1005,8 +1049,7 @@ Solid {
   name "solid(7)"
 }
 Solid {
-  translation -3.74 1.23 0.07486756499999998
-  rotation -0.008286533476342882 -0.0994384017164813 0.9950092148452783 1.5243854253376784e-15
+  translation -3.74 1.23 0.0749
   children [
     Shape {
       appearance PBRAppearance {
@@ -1031,8 +1074,7 @@ Solid {
   ]
 }
 Solid {
-  translation -3.74 3.77 0.07486756499999998
-  rotation -0.04410945198391261 8.6426744261059e-15 0.9990267044707458 1.4318780091118736e-15
+  translation -3.7382797594540573 3.7681362049005123 0.07486756500548854
   children [
     Shape {
       appearance PBRAppearance {
@@ -1058,7 +1100,6 @@ Solid {
 }
 Solid {
   translation -4.04 3.77 0.074867565
-  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1084,7 +1125,6 @@ Solid {
 }
 Solid {
   translation -4.34 3.77 0.074867565
-  rotation 0.008491856863452529 0.0679348549073791 0.9976536191763773 1.4875275291519311e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1110,7 +1150,6 @@ Solid {
 }
 Solid {
   translation -4.64 3.77 0.074867565
-  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1136,7 +1175,6 @@ Solid {
 }
 Solid {
   translation -4.94 3.77 0.074867565
-  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1161,8 +1199,7 @@ Solid {
   ]
 }
 Solid {
-  translation -4.04 1.23 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  translation -4.0483653158889625 1.2315122001315626 0.07486753352783508
   children [
     Shape {
       appearance PBRAppearance {
@@ -1188,7 +1225,6 @@ Solid {
 }
 Solid {
   translation -4.34 1.23 0.07486756499999998
-  rotation -0.007748171003299056 7.779780689216137e-15 0.9999699824725258 1.6303035713252883e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1214,7 +1250,6 @@ Solid {
 }
 Solid {
   translation -4.64 1.23 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1240,7 +1275,6 @@ Solid {
 }
 Solid {
   translation -4.94 1.23 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1266,7 +1300,6 @@ Solid {
 }
 Solid {
   translation -3.74 -1.46 0.07486756499999998
-  rotation -0.008286533476342882 -0.0994384017164813 0.9950092148452783 1.5243854253376784e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1292,7 +1325,6 @@ Solid {
 }
 Solid {
   translation -4.04 -1.46 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1318,7 +1350,6 @@ Solid {
 }
 Solid {
   translation -4.94 -1.46 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1344,7 +1375,6 @@ Solid {
 }
 Solid {
   translation -4.64 -1.46 0.07486756499999998
-  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1370,7 +1400,6 @@ Solid {
 }
 Solid {
   translation -4.34 -1.46 0.07486756499999998
-  rotation -0.007748171003299056 7.779780689216137e-15 0.9999699824725258 1.6303035713252883e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1382,7 +1411,7 @@ Solid {
       }
     }
   ]
-  name "Green_Box(4)"
+  name "Yellow_Box(4)"
   model "box"
   boundingObject Box {
     size 0.05 0.05 0.05
@@ -1396,7 +1425,6 @@ Solid {
 }
 Solid {
   translation -4.34 -4.08 0.07486756499999998
-  rotation 0.03196775565064388 -0.07672261356148227 0.9965398653174674 1.9757206286253933e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1422,7 +1450,6 @@ Solid {
 }
 Solid {
   translation -4.64 -4.08 0.074867565
-  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1448,7 +1475,6 @@ Solid {
 }
 Solid {
   translation -4.94 -4.08 0.074867565
-  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1474,7 +1500,6 @@ Solid {
 }
 Solid {
   translation -4.04 -4.08 0.074867565
-  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
   children [
     Shape {
       appearance PBRAppearance {
@@ -1499,8 +1524,7 @@ Solid {
   ]
 }
 Solid {
-  translation -3.74 -4.08 0.0749
-  rotation 0.7067522934959005 0.0704194810203707 0.7039476488568638 -3.000153714731957
+  translation -3.740099889199387 -4.079995185655681 0.07486756500010935
   children [
     Shape {
       appearance PBRAppearance {

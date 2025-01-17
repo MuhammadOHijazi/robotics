@@ -223,15 +223,24 @@ class RobotController(Robot):
     
     def move_forward(self, speed):
         self.set_wheel_speeds(speed, speed, speed, speed)
-    
-    def set_motor_velocity(self, left_velocity, right_velocity):
+
+    def move_backward(self, speed):
+        self.set_motor_velocity(-speed, -speed, -speed, -speed)
+
+    def set_motor_rotation_velocity(self, left_velocity, right_velocity):
         self.front_left_motor.setVelocity(left_velocity)
         self.back_left_motor.setVelocity(left_velocity)
         self.front_right_motor.setVelocity(right_velocity)
         self.back_right_motor.setVelocity(right_velocity)
 
+    def set_motor_velocity(self, front_left, front_right, back_left, back_right):
+        self.front_left_motor.setVelocity(front_left)
+        self.front_right_motor.setVelocity(front_right)
+        self.back_left_motor.setVelocity(back_left)
+        self.back_right_motor.setVelocity(back_right)
+
     def stop_motors(self):
-        self.set_motor_velocity(0.0, 0.0)
+        self.set_motor_velocity(0.0, 0.0,0.0,0.0)
 
     # get current angle 
     def get_current_angle(self):
@@ -264,9 +273,9 @@ class RobotController(Robot):
 
                 # Determine direction of rotation
                 if angle_difference <= 180:
-                    self.set_motor_velocity(self.rotation_velocity, -self.rotation_velocity)
+                    self.set_motor_rotation_velocity(self.rotation_velocity, -self.rotation_velocity)
                 else:
-                    self.set_motor_velocity(-self.rotation_velocity, self.rotation_velocity)
+                    self.set_motor_rotation_velocity(-self.rotation_velocity, self.rotation_velocity)
 
                 # Step simulation
                 if self.step(self.timestep) == -1:
@@ -276,6 +285,7 @@ class RobotController(Robot):
                 self.stop_motors()
                 self.wait_for_sensors(5)  # انتظر قليلاً وحاول مرة أخرى
         self.stop_motors()
+
 
     def turn_left_90_degrees(self):
         current_angle = self.get_current_angle()
