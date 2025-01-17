@@ -1,0 +1,1526 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/kuka/youbot/protos/Youbot.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/mir/mir100/protos/Mir100UltrasonicSensor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Roughcast.proto"
+
+WorldInfo {
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        0, 2, 0
+      ]
+      frictionRotation -0.785398 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        0, 2, 0
+      ]
+      frictionRotation 0.785398 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.32814049531656725 -0.3235270000402154 -0.8874987862405088 4.5997631679335536
+  position -0.056756345084971786 -15.777346774748858 13.125345391651562
+  followType "Pan and Tilt Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 0.05
+  name "rectangle arena(1)"
+  floorSize 10 10
+  floorAppearance Appearance {
+    texture ImageTexture {
+      url [
+        "Battle area3.png"
+      ]
+    }
+    textureTransform TextureTransform {
+      scale 0.05 0.05
+    }
+  }
+}
+Solid {
+  translation -1.17 -1.1 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+          emissiveColor 1 0 0
+          specularColor 1 0 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Red"
+}
+Solid {
+  translation 1.16 -1.03 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+          emissiveColor 1 0 0
+          specularColor 1 0 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Red(1)"
+}
+Solid {
+  translation -1.17 -0.64 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+          emissiveColor 0 1 0
+          specularColor 0 1 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Green"
+}
+Solid {
+  translation 1.16 -0.5 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+          emissiveColor 0 1 0
+          specularColor 0 1 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Green(1)"
+}
+Solid {
+  translation -1.17 -0.36 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+          emissiveColor 0 0 1
+          specularColor 0 0 1
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Blue"
+}
+Solid {
+  translation 1.16 -0.79 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+          emissiveColor 0 0 1
+          specularColor 0 0 1
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Blue(1)"
+}
+Solid {
+  translation -4.2 1.17 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+          emissiveColor 0 0 1
+          specularColor 0 0 1
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchblueleft"
+}
+Solid {
+  translation -4.2 3.8 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+          emissiveColor 1 0 0
+          specularColor 1 0 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchredleft"
+}
+Solid {
+  translation -4.21 -1.46 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+          emissiveColor 1 1 0
+          specularColor 1 1 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchyellowleft"
+}
+Solid {
+  translation -1.18 -2.07 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.666667 1
+          emissiveColor 0 0.666667 1
+          specularColor 0 0.666667 1
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "start_plane"
+}
+Solid {
+  translation 1.16 -2.07 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.666667 1
+          emissiveColor 0 0.666667 1
+          specularColor 0 0.666667 1
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "start_plane(1)"
+}
+Solid {
+  translation 4.16 -1.46 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+          emissiveColor 1 1 0
+          specularColor 1 1 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchyellowright"
+}
+Solid {
+  translation -4.21 -4.09 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+          emissiveColor 0 1 0
+          specularColor 0 1 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchgreenleft"
+}
+Solid {
+  translation 4.16 -4.09 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+          emissiveColor 0 1 0
+          specularColor 0 1 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchgreenright"
+}
+Solid {
+  translation 4.2 3.8 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+          emissiveColor 1 0 0
+          specularColor 1 0 0
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchredright"
+}
+Solid {
+  translation 4.2 1.17 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+          emissiveColor 0 0 1
+          specularColor 0 0 1
+        }
+      }
+      geometry Plane {
+        size 1.6 1.6
+      }
+    }
+  ]
+  name "patchblueright"
+}
+Solid {
+  translation -1.17 -0.88 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+          emissiveColor 1 1 0
+          specularColor 1 1 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow"
+}
+Solid {
+  translation 1.17 -0.27 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+          emissiveColor 1 1 0
+          specularColor 1 1 0
+        }
+      }
+      geometry Plane {
+        size 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow(1)"
+}
+Youbot {
+  translation -1.17477 -2.04883 0.151811
+  rotation 0 0 1 1.5708
+  name "KuKa"
+  controller "line_follow_v1"
+  bodySlot [
+    Compass {
+      recognitionColors [
+        0 0 0
+      ]
+    }
+    GPS {
+      accuracy 0.01
+    }
+    DistanceSensor {
+      translation 0.23 0.01 -0.04
+      name "if1"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0 -0.04
+      name "if2"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.04
+      name "if3"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if4"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if5"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.1 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if6"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.23 0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if7"
+    }
+    DistanceSensor {
+      translation -0.23 0 -0.02
+      rotation 0 0 1 3.14159
+      name "if8"
+    }
+    DistanceSensor {
+      translation -0.23 -0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if9"
+    }
+    DistanceSensor {
+      translation -0.1 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if10"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if11"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if12"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.03
+      rotation 0 0 1 0.7854000000000001
+      name "if13"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    Lidar {
+      translation 0.27 0 -0.09
+      numberOfLayers 1
+    }
+    Mir100UltrasonicSensor {
+      translation 0.28 -0.01 -0.074
+      name "ultrasonic_sensor"
+      lookupTable [
+        0.01 995 0
+        0.35 0 0
+      ]
+    }
+    Camera {
+      translation 0.28 -0.01 -0.0799993
+      rotation 0 1 0 1.5708
+      fieldOfView 0.8
+      recognition Recognition {
+        frameThickness 3
+      }
+    }
+    DistanceSensor {
+      translation 0.266 0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir1"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.266 -0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir12"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir2"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 -0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir11"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir3"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 -0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir10"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2772 0.066 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir4"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2808 0.05 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir5"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2817 0.025 -0.0864086
+      rotation 0 1 0 1.507
+      name "ir6"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2818 -0.004 -0.0857775
+      rotation 0 1 0 1.507
+      name "ir7"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.282 -0.034 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir8"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.276 -0.066 -0.0876836
+      rotation 0 1 0 1.507
+      name "ir9"
+      type "infra-red"
+    }
+  ]
+}
+Youbot {
+  translation 1.16498 -2.05644 0.153232
+  rotation 0 0 1 1.5708
+  name "KuKa_2"
+  controller "line_follow_v2"
+  bodySlot [
+    Compass {
+      recognitionColors [
+        0 0 0
+      ]
+    }
+    GPS {
+      accuracy 0.01
+    }
+    DistanceSensor {
+      translation 0.23 0.01 -0.04
+      name "if1"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0 -0.04
+      name "if2"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.04
+      name "if3"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if4"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if5"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.1 0.14 -0.02
+      rotation 0 0 1 1.5708
+      name "if6"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.23 0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if7"
+    }
+    DistanceSensor {
+      translation -0.23 0 -0.02
+      rotation 0 0 1 3.14159
+      name "if8"
+    }
+    DistanceSensor {
+      translation -0.23 -0.1 -0.02
+      rotation 0 0 1 3.14159
+      name "if9"
+    }
+    DistanceSensor {
+      translation -0.1 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if10"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.02 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if11"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.13 -0.14 -0.03
+      rotation 0 0 1 -1.5708
+      name "if12"
+      lookupTable [
+        0 0 0
+        0.8 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.23 0.1 -0.03
+      rotation 0 0 1 0.7854000000000001
+      name "if13"
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+    }
+    Lidar {
+      translation 0.27 0 -0.09
+      numberOfLayers 1
+    }
+    Mir100UltrasonicSensor {
+      translation 0.28 -0.01 -0.074
+      name "ultrasonic_sensor"
+      lookupTable [
+        0.01 995 0
+        0.35 0 0
+      ]
+    }
+    Camera {
+      translation 0.28 -0.01 -0.0799993
+      rotation 0 1 0 1.5708
+      fieldOfView 0.8
+      recognition Recognition {
+        frameThickness 3
+      }
+    }
+    DistanceSensor {
+      translation 0.266 0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir1"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.266 -0.11 -0.0838586
+      rotation 0 1 0 1.507
+      name "ir12"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir2"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.268 -0.095 -0.0870525
+      rotation 0 1 0 1.507
+      name "ir11"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir3"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.271 -0.078 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir10"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2772 0.066 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir4"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2808 0.05 -0.0864123
+      rotation 0 1 0 1.507
+      name "ir5"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2817 0.025 -0.0864086
+      rotation 0 1 0 1.507
+      name "ir6"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.2818 -0.004 -0.0857775
+      rotation 0 1 0 1.507
+      name "ir7"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.282 -0.034 -0.0870461
+      rotation 0 1 0 1.507
+      name "ir8"
+      type "infra-red"
+    }
+    DistanceSensor {
+      translation 0.276 -0.066 -0.0876836
+      rotation 0 1 0 1.507
+      name "ir9"
+      type "infra-red"
+    }
+  ]
+}
+Wall {
+  translation 0 0 0.045
+  size 0.38 10 0.4
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Solid {
+  translation -1.17 -0.67 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+}
+Solid {
+  translation 1.16 -0.67 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(12)"
+}
+Solid {
+  translation -2.97 3.76 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(3)"
+}
+Solid {
+  translation 2.97 3.75 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(8)"
+}
+Solid {
+  translation 3.01 1.15 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(9)"
+}
+Solid {
+  translation 3.01 -1.46 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(10)"
+}
+Solid {
+  translation 2.97 -4.14 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(11)"
+}
+Solid {
+  translation -3.02 1.15 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(4)"
+}
+Solid {
+  translation -3.02 -1.47 0.05
+  rotation 0 0 -0.9999999999999999 1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(5)"
+}
+Solid {
+  translation -3.01 -4.07 0.05
+  rotation 0 0 -0.9999999999999999 1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 1.3
+      }
+    }
+  ]
+  name "solid(6)"
+}
+Solid {
+  translation -5.19723e-15 1.19297e-06 0.05
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 4.64
+      }
+    }
+  ]
+  name "solid(1)"
+}
+Solid {
+  translation -2.34 -0.165 0.05
+  rotation 0 0 1 3.14159
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 7.87
+      }
+    }
+  ]
+  name "solid(2)"
+}
+Solid {
+  translation 2.34 -0.175 0.05
+  rotation 0 0 1 3.14159
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+      }
+      geometry Plane {
+        size 0.05 7.88
+      }
+    }
+  ]
+  name "solid(7)"
+}
+Solid {
+  translation -3.74 1.23 0.07486756499999998
+  rotation -0.008286533476342882 -0.0994384017164813 0.9950092148452783 1.5243854253376784e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        emissiveColor 0 0.666667 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Blue_Box"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -3.74 3.77 0.07486756499999998
+  rotation -0.04410945198391261 8.6426744261059e-15 0.9990267044707458 1.4318780091118736e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        emissiveColor 0.666667 0 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "red_Box"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.04 3.77 0.074867565
+  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        emissiveColor 0.666667 0 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "red_Box(1)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.34 3.77 0.074867565
+  rotation 0.008491856863452529 0.0679348549073791 0.9976536191763773 1.4875275291519311e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        emissiveColor 0.666667 0 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "red_Box(2)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.64 3.77 0.074867565
+  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        emissiveColor 0.666667 0 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "red_Box(3)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.94 3.77 0.074867565
+  rotation -0.026799628776534582 -0.01786641918436713 0.9994811508792792 1.4140349812237295e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        emissiveColor 0.666667 0 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "red_Box(4)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.04 1.23 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        emissiveColor 0 0.666667 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Blue_Box(1)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.34 1.23 0.07486756499999998
+  rotation -0.007748171003299056 7.779780689216137e-15 0.9999699824725258 1.6303035713252883e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        emissiveColor 0 0.666667 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Blue_Box(2)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.64 1.23 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        emissiveColor 0 0.666667 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Blue_Box(3)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.94 1.23 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        emissiveColor 0 0.666667 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Blue_Box(4)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -3.74 -1.46 0.07486756499999998
+  rotation -0.008286533476342882 -0.0994384017164813 0.9950092148452783 1.5243854253376784e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0.498039
+        emissiveColor 1 1 0.498039
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow_Box(5)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.04 -1.46 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0.498039
+        emissiveColor 1 1 0.498039
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow_Box(1)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.94 -1.46 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0.498039
+        emissiveColor 1 1 0.498039
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow_Box(2)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.64 -1.46 0.07486756499999998
+  rotation -0.11418291312100652 0.017566602018629814 0.9933044230469931 1.4381689577263741e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0.498039
+        emissiveColor 1 1 0.498039
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Yellow_Box(3)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.34 -1.46 0.07486756499999998
+  rotation -0.007748171003299056 7.779780689216137e-15 0.9999699824725258 1.6303035713252883e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0.498039
+        emissiveColor 1 1 0.498039
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box(4)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.34 -4.08 0.07486756499999998
+  rotation 0.03196775565064388 -0.07672261356148227 0.9965398653174674 1.9757206286253933e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 0
+        emissiveColor 0 0.333333 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.64 -4.08 0.074867565
+  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 0
+        emissiveColor 0 0.333333 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box(3)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.94 -4.08 0.074867565
+  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 0
+        emissiveColor 0 0.333333 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box(5)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -4.04 -4.08 0.074867565
+  rotation 0.008038909348763933 -0.016077818697467067 0.9998384267882554 1.5713413735585913e-15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 0
+        emissiveColor 0 0.333333 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box(1)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation -3.74 -4.08 0.0749
+  rotation 0.7067522934959005 0.0704194810203707 0.7039476488568638 -3.000153714731957
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.333333 0
+        emissiveColor 0 0.333333 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "Green_Box(2)"
+  model "box"
+  boundingObject Box {
+    size 0.05 0.05 0.05
+  }
+  physics Physics {
+    density 2700
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
