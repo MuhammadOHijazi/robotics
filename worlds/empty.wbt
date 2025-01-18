@@ -35,8 +35,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.034858076868212115 0.9900922802737352 -0.1360227591964133 0.6554527260890124
-  position -12.85600385461072 1.0546407893830956 9.629834785061101
+  orientation -0.2939002074603506 0.19474540650450775 0.9357867784384202 2.0086623476967014
+  position 3.0351166468131443 -8.321707852359099 6.450917021964955
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -388,6 +388,8 @@ Youbot {
   name "KuKa"
   controller "line_follow_v1"
   bodySlot [
+    Emitter {
+    }
     Compass {
       recognitionColors [
         0 0 0
@@ -598,6 +600,8 @@ Youbot {
   name "KuKa_2"
   controller "line_follow_v2"
   bodySlot [
+    Receiver {
+    }
     Compass {
       recognitionColors [
         0 0 0

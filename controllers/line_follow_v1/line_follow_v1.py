@@ -1,7 +1,7 @@
-from controller import Robot, Camera
+from controller import Robot, Camera , Emitter
 import math
 import time 
-
+import struct
 
 class Box:
     def __init__(self, color, x, y, z):
@@ -116,6 +116,14 @@ class RobotController(Robot):
             raise Exception("Compass device not found! Check robot configuration.")
         # Enable Compass
         self.compass.enable(self.timestep)
+
+        self.emitter = self.getDevice('emitter')
+        self.cube = 100
+        
+
+    def send_boolean(self, value):
+        self.emitter.send(struct.pack('i', value))
+        print(" SEND !!")
 
     def clamp_speed(self, speed):
         return max(min(speed, self.max_velocity), -self.max_velocity)
@@ -435,6 +443,7 @@ class RobotController(Robot):
         self.wait_for_sensors(100)
         self.move_to_correct_y_position(target_y,speed)
 
+
     def start(self):
         time.sleep(1)
         print(f'Current Y: {self.current_y}')
@@ -695,6 +704,8 @@ class RobotController(Robot):
         self.step(100 * self.timestep)
         # change the Vlaue of 
         self.COUNTER_PICK_UP +=1
+        self.send_boolean(self.cube)
+        time.sleep(1)
 
     def return_from_red_to_node(self):
         time.sleep(1)
@@ -816,10 +827,17 @@ for color in robot.color_queue:
         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
         robot.pick_up_form_basket()
         robot.return_from_wall_to_node()
+    elif color == 'Green':
+        print("\nThe Color Is Now Green \n")
+        robot.go_to_green()
+        time.sleep(1)
+        robot.move_to_position(target_x = -3.2800, target_y = -4.11078)
+        robot.pick_green_and_retrun_to_node()
+        robot.go_from_node_to_wall()
+        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+        robot.pick_up_form_basket()
+        robot.return_from_wall_to_node()
 
-#     # elif color == 'Green':
-#     #     print("\nThe Color Is Now Green \n")
-#     #     robot.go_to_green()
 #     # elif color == 'Yellow':
 #     #     print("\nThe Color Is Now Yellow \n")
 #     #     robot.go_to_yellow()

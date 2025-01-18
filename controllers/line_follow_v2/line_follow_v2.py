@@ -1,6 +1,7 @@
-from controller import Robot, Camera
+from controller import Robot, Camera, Receiver
 import math
-import time 
+import time
+import struct
 
 def range_conversion(s_start, s_end, d_start, d_end, value):
     """
@@ -127,6 +128,20 @@ class RobotController(Robot):
         # Enable Compass
         self.compass.enable(self.timestep)
 
+        self.receiver = self.getDevice('receiver') 
+        self.receiver.enable(self.timestep)
+
+
+    def receive_message(self):
+        if self.receiver.getQueueLength() > 0:
+            message = self.receiver.getString()  
+            self.receiver.nextPacket()  
+            try:
+                # value = float(message)  
+               return message  
+            except ValueError:
+               message = 'Received data is not a valid number.'
+               return message
 
     def clamp_speed(self, speed):
         return max(min(speed, self.max_velocity), -self.max_velocity)
@@ -523,9 +538,16 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()            
 
-# robot = RobotController()
+robot = RobotController()
 # robot.go_to_wall()
 # robot.print_color_queue()
+# msg = robot.receive_message()
+while robot.step(robot.timestep) != -1 :
+    msg = robot.receive_message()
+    print(msg)
+    if  msg != None:
+        robot.go_to_wall()
+
 
 
 
