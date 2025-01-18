@@ -35,8 +35,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.33754666598630084 0.33241309649589124 0.8806609912784522 1.6928161012312153
-  position 0.5054398378341182 -7.435155976117645 5.229267749926888
+  orientation -0.17074146393957845 0.17947460060233028 0.9688324004854523 1.512742417589803
+  position -0.764928177799669 -16.51233451863412 6.450433658078766
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -383,30 +383,8 @@ Solid {
   name "Yellow(1)"
 }
 Youbot {
-  hidden translation_32 0 0 0.077
-  hidden rotation_32 0 0 1 0
-  hidden translation_33 0.033 0 0.07
-  hidden rotation_33 0 1 0 2.9802322387695313e-08
-  hidden translation_34 0 0 0.155
-  hidden rotation_34 0 -1 0 0
-  hidden translation_35 0 0 0.135
-  hidden rotation_35 0 -1 0 0
-  hidden translation_36 0 0 0.081
-  hidden rotation_36 0 0 1 0
-  hidden translation_37 0 0.025000000024066577 0.09
-  hidden rotation_37 1 0 0 4.71239
-  hidden translation_38 0 -0.02499999997593376 0.09
-  hidden rotation_38 0 -0.7071067811865476 0.7071067811865476 3.14159
-  hidden translation_39 0.228 -0.158 -0.055
-  hidden rotation_39 0 1 0 4.849182121590965
-  hidden translation_40 0.228 0.158 -0.055
-  hidden rotation_40 0 1 0 4.262787238591622
-  hidden translation_41 -0.228 -0.158 -0.055
-  hidden rotation_41 0 1 0 4.849332515087192
-  hidden translation_42 -0.228 0.158 -0.055
-  hidden rotation_42 0 1 0 4.262982449036864
-  translation -1.1750538219855464 -2.048146792889991 0.14887348236528225
-  rotation -0.0021642406130696176 0.0020827661301494335 0.9999954890637335 1.5707942750081794
+  translation -1.17477 -2.04883 0.151811
+  rotation 0 0 1 1.5708
   name "KuKa"
   controller "line_follow_v1"
   bodySlot [
@@ -615,30 +593,8 @@ Youbot {
   ]
 }
 Youbot {
-  hidden translation_32 0 0 0.077
-  hidden rotation_32 0 0 1 0
-  hidden translation_33 0.033 0 0.07
-  hidden rotation_33 0 -1 0 4.2774379534743284e-07
-  hidden translation_34 0 0 0.155
-  hidden rotation_34 0 -1 0 6.697238997889858e-07
-  hidden translation_35 0 0 0.135
-  hidden rotation_35 0 -1 0 0
-  hidden translation_36 0 0 0.081
-  hidden rotation_36 0 0 1 0
-  hidden translation_37 0 4.7909745935928316e-11 0.09
-  hidden rotation_37 1 0 0 4.71239
-  hidden translation_38 0 2.430951303076387e-11 0.09
-  hidden rotation_38 0 -0.7071067811865476 0.7071067811865476 3.14159
-  hidden translation_39 0.228 -0.158 -0.055
-  hidden rotation_39 0 1 0 0
-  hidden translation_40 0.228 0.158 -0.055
-  hidden rotation_40 0 1 0 0
-  hidden translation_41 -0.228 -0.158 -0.055
-  hidden rotation_41 0 1 0 0
-  hidden translation_42 -0.228 0.158 -0.055
-  hidden rotation_42 0 1 0 0
-  translation 1.1649714588117792 -2.0559940627388715 0.1488734791713149
-  rotation -0.0021641699405449914 0.0020828318853603396 0.9999954890797287 1.570804540588867
+  translation 1.15874 -2.09477 0.148873
+  rotation 0 0 1 1.5708
   name "KuKa_2"
   controller "line_follow_v2"
   bodySlot [
@@ -1049,7 +1005,8 @@ Solid {
   name "solid(7)"
 }
 Solid {
-  translation -3.74 1.23 0.0749
+  translation -3.74 1.23 0.07486756503154032
+  rotation -0.27496773350237874 0.8249032005071231 -0.4938901247501005 9.18789320991244e-17
   children [
     Shape {
       appearance PBRAppearance {
@@ -1074,7 +1031,7 @@ Solid {
   ]
 }
 Solid {
-  translation -3.7382797594540573 3.7681362049005123 0.07486756500548854
+  translation -3.74 3.77 0.0749
   children [
     Shape {
       appearance PBRAppearance {
@@ -1100,6 +1057,7 @@ Solid {
 }
 Solid {
   translation -4.04 3.77 0.074867565
+  rotation 0.6605097556865553 -0.49538231676491973 -0.564201402762797 1.529954190587543e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1125,6 +1083,7 @@ Solid {
 }
 Solid {
   translation -4.34 3.77 0.074867565
+  rotation -0.7802022381811097 0.6241617905448904 -0.04131012903615166 3.2381016715373917e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1150,6 +1109,7 @@ Solid {
 }
 Solid {
   translation -4.64 3.77 0.074867565
+  rotation 0.6605097556865553 -0.49538231676491973 -0.564201402762797 1.529954190587543e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1175,6 +1135,7 @@ Solid {
 }
 Solid {
   translation -4.94 3.77 0.074867565
+  rotation 0.6605097556865553 -0.49538231676491973 -0.564201402762797 1.529954190587543e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1199,7 +1160,8 @@ Solid {
   ]
 }
 Solid {
-  translation -4.0483653158889625 1.2315122001315626 0.07486753352783508
+  translation -4.0483653158889625 1.2315122001315626 0.0748675649999694
+  rotation 0.19395597006134008 -0.9697798503067276 0.14801393048164674 1.3025503524291715e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1224,7 +1186,8 @@ Solid {
   ]
 }
 Solid {
-  translation -4.34 1.23 0.07486756499999998
+  translation -4.34 1.23 0.074867565
+  rotation 0.20862769252978744 -0.7301969238542669 0.6506050555471133 2.421897247634793e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1250,6 +1213,7 @@ Solid {
 }
 Solid {
   translation -4.64 1.23 0.07486756499999998
+  rotation -0.9772730161878075 0.1628788360313 0.13567585122000908 1.5510757770309454e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1275,6 +1239,7 @@ Solid {
 }
 Solid {
   translation -4.94 1.23 0.07486756499999998
+  rotation -0.9772730161878075 0.1628788360313 0.13567585122000908 1.5510757770309454e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1300,6 +1265,7 @@ Solid {
 }
 Solid {
   translation -3.74 -1.46 0.07486756499999998
+  rotation -0.5543820826462272 -0.8315731239693319 -0.0338621607803984 9.11419849477231e-17
   children [
     Shape {
       appearance PBRAppearance {
@@ -1325,6 +1291,7 @@ Solid {
 }
 Solid {
   translation -4.04 -1.46 0.07486756499999998
+  rotation -0.9772730161878075 0.1628788360313 0.13567585122000908 1.5510757770309454e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1350,6 +1317,7 @@ Solid {
 }
 Solid {
   translation -4.94 -1.46 0.07486756499999998
+  rotation -0.9772730161878075 0.1628788360313 0.13567585122000908 1.5510757770309454e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1375,6 +1343,7 @@ Solid {
 }
 Solid {
   translation -4.64 -1.46 0.07486756499999998
+  rotation -0.9772730161878075 0.1628788360313 0.13567585122000908 1.5510757770309454e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1399,7 +1368,8 @@ Solid {
   ]
 }
 Solid {
-  translation -4.34 -1.46 0.07486756499999998
+  translation -4.34 -1.46 0.074867565
+  rotation 0.20862769252978744 -0.7301969238542669 0.6506050555471133 2.421897247634793e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1424,7 +1394,8 @@ Solid {
   ]
 }
 Solid {
-  translation -4.34 -4.08 0.07486756499999998
+  translation -4.34 -4.08 0.074867565
+  rotation 0.46780189351167745 0.1871207574046721 -0.8637981306851684 2.7002607371109386e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1450,6 +1421,7 @@ Solid {
 }
 Solid {
   translation -4.64 -4.08 0.074867565
+  rotation 0.5261052454608206 0.5261052454608042 0.6681515856429862 1.440609570074875e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1475,6 +1447,7 @@ Solid {
 }
 Solid {
   translation -4.94 -4.08 0.074867565
+  rotation 0.5261052454608206 0.5261052454608042 0.6681515856429862 1.440609570074875e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1500,6 +1473,7 @@ Solid {
 }
 Solid {
   translation -4.04 -4.08 0.074867565
+  rotation 0.5261052454608206 0.5261052454608042 0.6681515856429862 1.440609570074875e-16
   children [
     Shape {
       appearance PBRAppearance {
@@ -1524,7 +1498,8 @@ Solid {
   ]
 }
 Solid {
-  translation -3.740099889199387 -4.079995185655681 0.07486756500010935
+  translation -3.740099889199387 -4.079995185655681 0.07486756500000002
+  rotation 0.47804623852536926 0.47804623852537037 -0.7368470585294417 2.6423951994524395e-16
   children [
     Shape {
       appearance PBRAppearance {

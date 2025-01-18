@@ -116,7 +116,7 @@ class RobotController(Robot):
         self.gps.enable(self.timestep)
 
         # define the initial cooridinates for the Kuka 1 in the World
-        self.current_x = -1.14126
+        self.current_x = 1.15874
         self.current_y = -2.09477
         self.current_z = 0.148873
 
@@ -472,7 +472,7 @@ class RobotController(Robot):
              self.move_forward(self.max_velocity)    
         self.stop_movement()
         self.stop_robot()
-        robot.wait_for_sensors(10)
+        self.wait_for_sensors(10)
         time.sleep(1)
     
     def pick_from_wall(self):
@@ -523,9 +523,9 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()            
 
-robot = RobotController()
-robot.go_to_wall()
-robot.print_color_queue()
+# robot = RobotController()
+# robot.go_to_wall()
+# robot.print_color_queue()
 
 
 
