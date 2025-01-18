@@ -91,8 +91,7 @@ class RobotController(Robot):
         self.armMotors[3].setVelocity(0.5)
         self.armMotors[4].setVelocity(1.5)
 
-        self.COUNTER_PICKK_UP=0
-        self.COUNTER_REV_PICKK_UP=0
+        self.COUNTER_PICK_UP=0
 
         # Box Queue
         self.box_queue = {
@@ -217,6 +216,12 @@ class RobotController(Robot):
     def move_backward(self, speed):
         self.set_motor_velocity(-speed, -speed, -speed, -speed)
 
+    def move_right(self, speed):
+        self.set_motor_velocity(-speed, speed, speed, -speed)
+
+    def move_left(self, speed):
+        self.set_motor_velocity(speed, -speed, -speed, speed)
+
     def set_motor_rotation_velocity(self, left_velocity, right_velocity):
         self.front_left_motor.setVelocity(left_velocity)
         self.back_left_motor.setVelocity(left_velocity)
@@ -308,7 +313,128 @@ class RobotController(Robot):
         print("First ROBOT")
         self.current_x,self.current_y,self.current_z = self.gps.getValues()
         print(f"First ROBOT,\tCurrent_X: {self.current_x}\tCurrent_y: {self.current_y}\t")
+
+    def move_to_correct_x_position(self, target_x, speed = 1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            print(f"Current Position: ({self.current_x}, {self.current_y})")
+            diff_x = target_x - self.current_x
+
+            if abs(diff_x) <= 0.001:  # Threshold for precision
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_x {diff_x}')
+            if abs(diff_x) > 0.001: 
+                if diff_x > 0:
+                    print("Moving backward to align X")
+                    self.move_backward(speed)  
+                else:
+                    print("Moving forward to align X")
+                    self.move_forward(speed)  
+            else:
+                self.stop_movement()
+                self.stop_robot() 
+                self.stop_motors()
+                self.wait_for_sensors(10)
     
+    def move_to_correct_x_position_Opposite(self, target_x, speed = 1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            print(f"Current Position: ({self.current_x}, {self.current_y})")
+            diff_x = target_x - self.current_x
+
+            if abs(diff_x) <= 0.001:  # Threshold for precision
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_x {diff_x}')
+            if abs(diff_x) > 0.001: 
+                if diff_x > 0:
+                    print("Moving forward to align X")
+                    self.move_forward(speed)  
+                   
+                else:
+                    print("Moving backward to align X")
+                    self.move_backward(speed)  
+            else:
+                self.stop_movement()
+                self.stop_robot() 
+                self.stop_motors()
+                self.wait_for_sensors(10)
+
+    def move_to_correct_y_position(self, target_y, speed=1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            diff_y = target_y - self.current_y
+            if abs(diff_y) <= 0.001:  
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_y {diff_y}')
+            if abs(diff_y) >= 0.001:  
+                if diff_y > 0:
+                    print("Moving right to align Y")
+                    self.move_right(speed) 
+                else:
+                    print("Moving left to align Y")
+                    self.move_left(speed) 
+            else:
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+
+    def move_to_correct_y_position_Opposite(self, target_y, speed=1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            diff_y = target_y - self.current_y
+            if abs(diff_y) <= 0.001:  
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_y {diff_y}')
+            if abs(diff_y) >= 0.001:  
+                if diff_y > 0:
+                    print("Moving left to align Y")
+                    self.move_left(speed)
+                else:
+                    print("Moving right to align Y")
+                    self.move_right(speed) 
+            else:
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                 
+    def move_to_position(self, target_x, target_y, speed=1.0):
+        self.move_to_correct_x_position(target_x,speed)
+        self.wait_for_sensors(100)
+        self.move_to_correct_y_position(target_y,speed)
+
     def start(self):
         time.sleep(1)
         print(f'Current Y: {self.current_y}')
@@ -427,8 +553,8 @@ class RobotController(Robot):
             print("lower arm")
             self.step(100 * self.timestep) 
             self.armMotors[1].setPosition(-1.10)
-            self.armMotors[2].setPosition(-1.00)
-            self.armMotors[3].setPosition(-1.10)
+            self.armMotors[2].setPosition(-1.05)
+            self.armMotors[3].setPosition(-1.00)
             print("close gripper")
             self.step(100 * self.timestep)  
             self.finger1.setPosition(0.010)  
@@ -458,7 +584,6 @@ class RobotController(Robot):
             self.hand_up()
             self.step(100 * self.timestep)
             print("return To start Position")
-            self.COUNTER_PICKK_UP += 1 
             
     def pick_green_and_retrun_to_node(self):
         self.pick_up()
@@ -504,6 +629,36 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()
         time.sleep(1)
+        # add corrections to positions
+        self.move_to_correct_x_position(-0.523046)
+        self.wait_for_sensors(10)
+        self.move_to_correct_y_position_Opposite(-0.126407)
+        self.wait_for_sensors(10)
+
+    def return_from_wall_to_node(self):
+        self.move_backward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        print(f'Current Y: {self.current_y}, Current X: {self.current_x}')
+        while self.step(self.timestep) != -1 and self.current_x >=-2.34:
+             self.get_gps_position()
+             print(f'Current X: {self.current_x}')
+             self.move_forward(self.max_velocity)    
+        self.stop_movement()
+        self.stop_robot()
+                # add corrections to positions
+        self.move_to_correct_x_position(-2.38364)
+        self.wait_for_sensors(10)
+        self.move_to_correct_y_position(-0.148089)
+        self.wait_for_sensors(10)
 
     def pick_up_form_basket(self):
         # rotate the hand to basket position
@@ -517,8 +672,8 @@ class RobotController(Robot):
         self.finger2.setPosition(self.fingerMaxPosition)
         self.step(100 * self.timestep)
         # down the hand a little to be able to catch the Box
-        self.armMotors[1].setPosition(-0.30)
-        self.armMotors[3].setPosition(-1.15)
+        self.armMotors[1].setPosition(-0.31)
+        self.armMotors[3].setPosition(-1.20)
         self.step(100 * self.timestep)
         # Catch the Box
         self.finger1.setPosition(0.010)  
@@ -529,7 +684,7 @@ class RobotController(Robot):
         self.step(100 * self.timestep)
         # Down the Hand to the Height of the Wall
         self.armMotors[2].setPosition(-1.0)
-        self.armMotors[3].setPosition(-0.70)
+        self.armMotors[3].setPosition(-1.0)
         self.step(100 * self.timestep)
         # open the finger to Drop the Box
         self.finger1.setPosition(self.fingerMaxPosition)
@@ -537,104 +692,9 @@ class RobotController(Robot):
         self.step(100 * self.timestep)
         # return the to the basic place
         self.hand_up()
-
-    def move_right(self, speed):
-        self.set_motor_velocity(-speed, speed, speed, -speed)
-
-    def move_left(self, speed):
-        self.set_motor_velocity(speed, -speed, -speed, speed)
-
-    def move_to_correct_x_position(self, target_x, speed = 1.0):
-        while True:
-            self.step(self.timestep)
-            self.wait_for_sensors(10)
-            self.get_gps_position()
-            # self.wait_for_sensors(10)
-            print(f"Current Position: ({self.current_x}, {self.current_y})")
-            diff_x = target_x - self.current_x
-
-            if abs(diff_x) <= 0.001:  # Threshold for precision
-                print("Arrived at target position!")
-                self.stop_movement()
-                self.stop_robot()
-                self.stop_motors()
-                self.wait_for_sensors(10)
-                break
-            print(f'diff_x {diff_x}')
-            if abs(diff_x) > 0.001: 
-                if diff_x > 0:
-                    print("Moving forward to align X")
-                    self.move_backward(speed)  
-                   
-                else:
-                    print("Moving backward to align X")
-                    self.move_forward(speed)  
-            else:
-                self.stop_movement()
-                self.stop_robot() 
-                self.stop_motors()
-                self.wait_for_sensors(10)
-
-
-    def move_to_correct_y_position(self, target_y, speed=1.0):
-        while True:
-            self.step(self.timestep)
-            self.wait_for_sensors(10)
-            self.get_gps_position()
-            # self.wait_for_sensors(10)
-            diff_y = target_y - self.current_y
-            if abs(diff_y) <= 0.001:  
-                print("Arrived at target position!")
-                self.stop_movement()
-                self.stop_robot()
-                self.stop_motors()
-                self.wait_for_sensors(10)
-                break
-            print(f'diff_y {diff_y}')
-            if abs(diff_y) >= 0.001:  
-                if diff_y > 0:
-                    print("Moving right to align Y")
-                    self.move_right(speed) 
-                else:
-                    print("Moving left to align Y")
-                    self.move_left(speed) 
-            else:
-                self.stop_movement()
-                self.stop_robot()
-                self.stop_motors()
-                self.wait_for_sensors(10)
-
-    def move_to_correct_y_position_Opposite(self, target_y, speed=1.0):
-        while True:
-            self.step(self.timestep)
-            self.wait_for_sensors(10)
-            self.get_gps_position()
-            diff_y = target_y - self.current_y
-            if abs(diff_y) <= 0.001:  
-                print("Arrived at target position!")
-                self.stop_movement()
-                self.stop_robot()
-                self.stop_motors()
-                self.wait_for_sensors(10)
-                break
-            print(f'diff_y {diff_y}')
-            if abs(diff_y) >= 0.001:  
-                if diff_y > 0:
-                    print("Moving left to align Y")
-                    self.move_left(speed)
-                else:
-                    print("Moving right to align Y")
-                    self.move_right(speed) 
-            else:
-                self.stop_movement()
-                self.stop_robot()
-                self.stop_motors()
-                self.wait_for_sensors(10)
-                 
-    def move_to_position(self, target_x, target_y, speed=1.0):
-        self.move_to_correct_x_position(target_x,speed)
-        self.wait_for_sensors(100)
-        self.move_to_correct_y_position(target_y,speed)
+        self.step(100 * self.timestep)
+        # change the Vlaue of 
+        self.COUNTER_PICK_UP +=1
 
     def return_from_red_to_node(self):
         time.sleep(1)
@@ -668,6 +728,50 @@ class RobotController(Robot):
         self.turn_left_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
+        # add corrections to positions
+        self.move_to_correct_x_position_Opposite(-0.523046)
+        self.wait_for_sensors(10)
+        self.move_to_correct_y_position_Opposite(-0.132864)
+        self.wait_for_sensors(10)
+
+    def return_from_blue_to_node(self):
+        time.sleep(1)
+        self.wait_for_sensors(10)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+        print('finish Turning')
+        self.get_gps_position()
+        time.sleep(1)
+        while self.step(self.timestep) != -1 and self.current_x <-2.45:
+            self.get_gps_position()
+            print(f'Current x: {self.current_x}')
+            self.move_forward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        time.sleep(1)
+        self.turn_right_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+        while self.step(self.timestep) != -1 and self.current_y >= 0.0:
+            self.get_gps_position()
+            print(f'Current Y: {self.current_y}')
+            self.move_forward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(10)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(1)
+
+        # add corrections to positions
+        self.move_to_correct_x_position_Opposite(-0.523046)
+        self.wait_for_sensors(10)
+        self.move_to_correct_y_position_Opposite(-0.132864)
+        self.wait_for_sensors(10)
 
     def go_from_node_to_wall(self):
         self.get_gps_position()
@@ -684,6 +788,7 @@ class RobotController(Robot):
 
 
 robot = RobotController()
+# robot.pick_up()
 robot.start()
 robot.print_color_queue()
 
@@ -698,10 +803,20 @@ for color in robot.color_queue:
         robot.go_from_node_to_wall()
         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
         robot.pick_up_form_basket()
-        
-#     # elif color == 'Blue':
-#     #     print("\nThe Color Is Now Blue\n")
-#     #     robot.go_to_blue()
+        robot.return_from_wall_to_node()
+
+    elif color == 'Blue':
+        print("\nThe Color Is Now Blue\n")
+        robot.go_to_blue()
+        time.sleep(1)
+        robot.move_to_position(target_x = -3.282, target_y = 1.19)
+        robot.pick_up()
+        robot.return_from_blue_to_node()
+        robot.go_from_node_to_wall()
+        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+        robot.pick_up_form_basket()
+        robot.return_from_wall_to_node()
+
 #     # elif color == 'Green':
 #     #     print("\nThe Color Is Now Green \n")
 #     #     robot.go_to_green()
