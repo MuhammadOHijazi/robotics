@@ -544,7 +544,6 @@ robot = RobotController()
 # msg = robot.receive_message()
 while robot.step(robot.timestep) != -1 :
     msg = robot.receive_message()
-    print(msg)
     if  msg != None:
         robot.go_to_wall()
 

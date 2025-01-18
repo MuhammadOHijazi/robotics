@@ -441,6 +441,13 @@ class RobotController(Robot):
     def move_to_position(self, target_x, target_y, speed=1.0):
         self.move_to_correct_x_position(target_x,speed)
         self.wait_for_sensors(100)
+        time.sleep(0.25)
+        self.move_to_correct_y_position(target_y,speed)
+        self.wait_for_sensors(100)
+        time.sleep(0.25)
+        self.move_to_correct_x_position(target_x,speed)
+        self.wait_for_sensors(100)
+        time.sleep(0.25)
         self.move_to_correct_y_position(target_y,speed)
 
 
@@ -480,8 +487,6 @@ class RobotController(Robot):
             self.stop_robot()
             self.wait_for_sensors(10)
             time.sleep(1)
-            self.wait_for_sensors(10)
-            time.sleep(1)
             self.turn_left_90_degrees()
             self.wait_for_sensors(10)
             time.sleep(1)
@@ -499,7 +504,7 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
         self.turn_left_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
@@ -517,7 +522,7 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
         self.turn_right_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
@@ -535,7 +540,7 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
         self.turn_right_90_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
@@ -581,7 +586,7 @@ class RobotController(Robot):
             self.armMotors[3].setPosition(-1.30)
             self.step(100 * self.timestep)
             # deraise the hand a little to be able to put the hand correctly
-            self.armMotors[1].setPosition(-0.30)
+            self.armMotors[1].setPosition(-0.25)
             self.step(50 * self.timestep)
             print("Drop the box on the Basket")
             self.finger1.setPosition(self.fingerMaxPosition)
@@ -645,7 +650,13 @@ class RobotController(Robot):
         self.wait_for_sensors(10)
 
     def return_from_wall_to_node(self):
-        self.move_backward(self.max_velocity)
+        while self.step(self.timestep) != -1 and self.current_x >=-1.17:
+             self.get_gps_position()
+             print(f'Current X: {self.current_x}')
+             self.move_backward(self.max_velocity)    
+        self.stop_movement()
+        self.stop_robot()
+        time.sleep(0.5)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -681,19 +692,19 @@ class RobotController(Robot):
         self.finger2.setPosition(self.fingerMaxPosition)
         self.step(100 * self.timestep)
         # down the hand a little to be able to catch the Box
-        self.armMotors[1].setPosition(-0.31)
-        self.armMotors[3].setPosition(-1.20)
+        self.armMotors[1].setPosition(-0.30)
+        self.armMotors[3].setPosition(-1.32)
         self.step(100 * self.timestep)
         # Catch the Box
-        self.finger1.setPosition(0.010)  
-        self.finger2.setPosition(0.010)
+        self.finger1.setPosition(0.012)  
+        self.finger2.setPosition(0.012)
         self.step(100 * self.timestep)
         # Get the Hand to Up 
         self.hand_up()
         self.step(100 * self.timestep)
         # Down the Hand to the Height of the Wall
-        self.armMotors[2].setPosition(-1.0)
-        self.armMotors[3].setPosition(-1.0)
+        self.armMotors[2].setPosition(-0.90)
+        self.armMotors[3].setPosition(-0.95)
         self.step(100 * self.timestep)
         # open the finger to Drop the Box
         self.finger1.setPosition(self.fingerMaxPosition)
@@ -784,6 +795,38 @@ class RobotController(Robot):
         self.move_to_correct_y_position_Opposite(-0.132864)
         self.wait_for_sensors(10)
 
+    def return_from_yellow_to_node(self):
+        time.sleep(0.5)
+        self.wait_for_sensors(10)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        print('finish Turning')
+        self.get_gps_position()
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_x <-2.45:
+            self.get_gps_position()
+            print(f'Current x: {self.current_x}')
+            self.move_forward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        time.sleep(0.5)
+        self.turn_left_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_y <= 0.0:
+            self.get_gps_position()
+            print(f'Current Y: {self.current_y}')
+            self.move_forward(self.max_velocity)
+        self.stop_movement()
+        self.stop_robot()
+        self.turn_right_90_degrees()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+
     def go_from_node_to_wall(self):
         self.get_gps_position()
         time.sleep(1)
@@ -799,7 +842,7 @@ class RobotController(Robot):
 
 
 robot = RobotController()
-# robot.pick_up()
+# robot.pick_up_form_basket()
 robot.start()
 robot.print_color_queue()
 
@@ -808,7 +851,7 @@ for color in robot.color_queue:
         print("\nThe Color Is Now RED\n")
         robot.go_to_red()
         time.sleep(1)
-        robot.move_to_position(target_x = -3.30032, target_y = 3.76234)
+        robot.move_to_position(target_x = -3.31059, target_y = 3.76234)
         robot.pick_up()
         robot.return_from_red_to_node()
         robot.go_from_node_to_wall()
@@ -820,7 +863,7 @@ for color in robot.color_queue:
         print("\nThe Color Is Now Blue\n")
         robot.go_to_blue()
         time.sleep(1)
-        robot.move_to_position(target_x = -3.282, target_y = 1.19)
+        robot.move_to_position(target_x = -3.31, target_y = 1.13)
         robot.pick_up()
         robot.return_from_blue_to_node()
         robot.go_from_node_to_wall()
@@ -831,19 +874,26 @@ for color in robot.color_queue:
         print("\nThe Color Is Now Green \n")
         robot.go_to_green()
         time.sleep(1)
-        robot.move_to_position(target_x = -3.2800, target_y = -4.11078)
+        robot.move_to_position(target_x = -3.30, target_y = -4.1472)
         robot.pick_green_and_retrun_to_node()
         robot.go_from_node_to_wall()
         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
         robot.pick_up_form_basket()
         robot.return_from_wall_to_node()
 
-#     # elif color == 'Yellow':
-#     #     print("\nThe Color Is Now Yellow \n")
-#     #     robot.go_to_yellow()
-#     # else:
-#     #     print('\nTheere is no Colors detect Bro\n')
-#     #     break
+    elif color == 'Yellow':
+        print("\nThe Color Is Now Yellow \n")
+        robot.go_to_yellow()
+        robot.move_to_position(target_x = -3.309, target_y = -1.50)
+        robot.pick_up()
+        robot.return_from_yellow_to_node()
+        robot.go_from_node_to_wall()
+        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+        robot.pick_up_form_basket()
+        robot.return_from_wall_to_node()
+    else:
+        print('\nTheere is no Colors detect Bro\n')
+        break
     
 
 
