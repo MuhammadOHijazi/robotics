@@ -53,7 +53,9 @@ class RobotController(Robot):
         self.sensors_coefficient = [5000, 4500, 4000, 3000, 2000, 1000, -1000, -2000, -3000, -4000, -4500, -5000]
         
         # setup static / constant values
-        self.max_velocity = 14.81
+        # self.max_velocity = 14.81
+        self.max_velocity = 7.0
+        
         self.movement_velocity = 4.0
         self.rotation_velocity = 2.0 
 
@@ -130,7 +132,6 @@ class RobotController(Robot):
 
         self.receiver = self.getDevice('receiver') 
         self.receiver.enable(self.timestep)
-
 
     def receive_message(self):
         if self.receiver.getQueueLength() > 0:
@@ -238,9 +239,15 @@ class RobotController(Robot):
     
     def move_forward(self, speed):
         self.set_wheel_speeds(speed, speed, speed, speed)
-
+    
     def move_backward(self, speed):
         self.set_motor_velocity(-speed, -speed, -speed, -speed)
+
+    def move_right(self, speed):
+        self.set_motor_velocity(-speed, speed, speed, -speed)
+
+    def move_left(self, speed):
+        self.set_motor_velocity(speed, -speed, -speed, speed)
 
     def set_motor_rotation_velocity(self, left_velocity, right_velocity):
         self.front_left_motor.setVelocity(left_velocity)
@@ -301,10 +308,14 @@ class RobotController(Robot):
                 self.wait_for_sensors(5)  # انتظر قليلاً وحاول مرة أخرى
         self.stop_motors()
 
-
     def turn_left_90_degrees(self):
         current_angle = self.get_current_angle()
         target_angle = (current_angle + 90) % 360
+        self.rotate_to_target_angle(target_angle)
+
+    def turn_left_180_degrees(self):
+        current_angle = self.get_current_angle()
+        target_angle = (current_angle + 180) % 360
         self.rotate_to_target_angle(target_angle)
 
     def turn_right_90_degrees(self):
@@ -335,83 +346,187 @@ class RobotController(Robot):
         self.current_x,self.current_y,self.current_z = self.gps.getValues()
         print(f"Second ROBOT, \tCurrent_X: {self.current_x}\tCurrent_y: {self.current_y}\t")
 
+    def move_to_correct_x_position(self, target_x, speed = 1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            print(f"Current Position: ({self.current_x}, {self.current_y})")
+            diff_x = target_x - self.current_x
+
+            if abs(diff_x) <= 0.001:  # Threshold for precision
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_x {diff_x}')
+            if abs(diff_x) > 0.001: 
+                if diff_x > 0:
+                    print("Moving backward to align X")
+                    self.move_backward(speed)  
+                else:
+                    print("Moving forward to align X")
+                    self.move_forward(speed)  
+            else:
+                self.stop_movement()
+                self.stop_robot() 
+                self.stop_motors()
+                self.wait_for_sensors(10)
+    
+    def move_to_correct_x_position_Opposite(self, target_x, speed = 1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            print(f"Current Position: ({self.current_x}, {self.current_y})")
+            diff_x = target_x - self.current_x
+
+            if abs(diff_x) <= 0.001:  # Threshold for precision
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_x {diff_x}')
+            if abs(diff_x) > 0.001: 
+                if diff_x > 0:
+                    print("Moving forward to align X")
+                    self.move_forward(speed)  
+                   
+                else:
+                    print("Moving backward to align X")
+                    self.move_backward(speed)  
+            else:
+                self.stop_movement()
+                self.stop_robot() 
+                self.stop_motors()
+                self.wait_for_sensors(10)
+
+    def move_to_correct_y_position(self, target_y, speed=1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            # self.wait_for_sensors(10)
+            diff_y = target_y - self.current_y
+            if abs(diff_y) <= 0.001:  
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_y {diff_y}')
+            if abs(diff_y) >= 0.001:  
+                if diff_y > 0:
+                    print("Moving right to align Y")
+                    self.move_right(speed) 
+                else:
+                    print("Moving left to align Y")
+                    self.move_left(speed) 
+            else:
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+
+    def move_to_correct_y_position_Opposite(self, target_y, speed=1.0):
+        while True:
+            self.step(self.timestep)
+            self.wait_for_sensors(10)
+            self.get_gps_position()
+            diff_y = target_y - self.current_y
+            if abs(diff_y) <= 0.001:  
+                print("Arrived at target position!")
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                break
+            print(f'diff_y {diff_y}')
+            if abs(diff_y) >= 0.001:  
+                if diff_y > 0:
+                    print("Moving left to align Y")
+                    self.move_left(speed)
+                else:
+                    print("Moving right to align Y")
+                    self.move_right(speed) 
+            else:
+                self.stop_movement()
+                self.stop_robot()
+                self.stop_motors()
+                self.wait_for_sensors(10)
+                 
+    def move_to_position(self, target_x, target_y, speed=1.0):
+        self.move_to_correct_x_position(target_x,speed)
+        self.wait_for_sensors(100)
+        time.sleep(0.25)
+        self.move_to_correct_y_position(target_y,speed)
+        self.wait_for_sensors(100)
+        time.sleep(0.25)
+        self.move_to_correct_x_position(target_x,speed)
+        self.wait_for_sensors(100)
+        time.sleep(0.25)
+        self.move_to_correct_y_position(target_y,speed)
+
     def go_to_red(self):
             self.wait_for_sensors(10)
-            time.sleep(1)
-            self.turn_left_90_degrees()
-            self.wait_for_sensors(10)
-            time.sleep(1)
             self.get_gps_position()
+            time.sleep(0.5)
             while self.step(self.timestep) != -1 and self.current_y <= 3.70:
                 self.get_gps_position()
                 print(f'Current Y: {self.current_y}')
-                self.move_forward(self.max_velocity)
+                self.move_left(self.max_velocity)
             self.stop_movement()
             self.stop_robot()
             self.wait_for_sensors(10)
-            time.sleep(1)
-            self.turn_right_90_degrees()
-            self.wait_for_sensors(10)
-            time.sleep(1)
+            time.sleep(0.5)
 
     def go_to_blue(self):
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_left_90_degrees()
-        self.wait_for_sensors(10)
-        time.sleep(1)
+        self.get_gps_position()
+        time.sleep(0.5)
         self.get_gps_position()
         while self.step(self.timestep) != -1 and self.current_y < 1.14:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_forward(self.max_velocity)
+            self.move_left(self.max_velocity)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_right_90_degrees()
-        self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
 
     def go_to_yellow(self):
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_right_90_degrees()
-        self.wait_for_sensors(10)
         self.get_gps_position()
-        time.sleep(1)
-        self.get_gps_position()
+        time.sleep(0.5)
         while self.step(self.timestep) != -1 and self.current_y >= -1.45:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_forward(self.max_velocity)
+            self.move_right(self.max_velocity)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_left_90_degrees()
-        self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
 
     def go_to_green(self):
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_right_90_degrees()
-        self.wait_for_sensors(10)
-        self.wait_for_sensors(10)
-        time.sleep(1)
+        self.get_gps_position()
+        time.sleep(0.5)
         self.get_gps_position()
         while self.step(self.timestep) != -1 and self.current_y > -4.0:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_forward(self.max_velocity)
+            self.move_right(self.max_velocity)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_left_90_degrees()
-        self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
 
     def wait_for_sensors(self, steps=10):
         for _ in range(steps):
@@ -466,6 +581,20 @@ class RobotController(Robot):
             print("return To start Position")
             self.hand_up()
 
+    # pickup  the box from the Ground
+    def drop(self):
+            print("lower arm")
+            self.step(100 * self.timestep) 
+            self.armMotors[1].setPosition(-1.13)
+            self.armMotors[2].setPosition(-1.10)
+            self.armMotors[3].setPosition(-1.35)
+            print("open gripper")
+            self.step(100 * self.timestep)  
+            self.finger1.setPosition(self.fingerMaxPosition)  
+            self.finger2.setPosition(self.fingerMaxPosition)
+            self.step(50 * self.timestep)  
+            self.hand_up()
+
     def go_to_wall(self):
         time.sleep(1)
         print(f'Current Y: {self.current_y}')
@@ -488,23 +617,52 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
-        time.sleep(1)
+        time.sleep(0.5)
+        self.get_gps_position()
+        time.sleep(0.5)
+        self.wait_for_sensors(10)
+        self.move_to_position(target_x=0.53, target_y=-0.127882)
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
     
     def pick_from_wall(self):
         self.step(100 * self.timestep)
         self.finger1.setPosition(self.fingerMaxPosition)
         self.finger2.setPosition(self.fingerMaxPosition)
         self.step(100 * self.timestep)
-        self.armMotors[2].setPosition(-1.0)
-        self.armMotors[3].setPosition(-1.5)
+        self.armMotors[1].setPosition(-0.05)
+        self.armMotors[2].setPosition(-0.90)
+        self.armMotors[3].setPosition(-0.90)
         self.step(100 * self.timestep)
-        self.finger1.setPosition(0.013)
-        self.finger2.setPosition(0.013)
+        self.finger1.setPosition(0.010)
+        self.finger2.setPosition(0.010)
         self.step(100 * self.timestep)
         self.hand_up()
-        self.step(50 * self.timestep)  # Wait a moment
+        self.step(100 * self.timestep)  # Wait a moment
         print("idle")
         self.put_box_in_basket()
+
+    def pick_up_form_basket(self):
+        # rotate the hand to basket position
+        self.armMotors[0].setPosition(-2.90)
+        self.armMotors[1].setPosition(0.30)
+        self.armMotors[2].setPosition(-1.35)
+        self.armMotors[3].setPosition(-1.30)
+        self.step(100 * self.timestep)
+        # open the fingers
+        self.finger1.setPosition(self.fingerMaxPosition)
+        self.finger2.setPosition(self.fingerMaxPosition)
+        self.step(100 * self.timestep)
+        # down the hand a little to be able to catch the Box
+        self.armMotors[1].setPosition(-0.30)
+        self.armMotors[3].setPosition(-1.15)
+        self.step(100 * self.timestep)
+        # Catch the Box
+        self.finger1.setPosition(0.012)  
+        self.finger2.setPosition(0.012)
+        self.step(100 * self.timestep)
+        # Get the Hand to Up 
+        self.hand_up()
 
     def put_box_in_basket(self):
         self.step(50 * self.timestep)  # Wait a moment
@@ -523,12 +681,17 @@ class RobotController(Robot):
         self.hand_up()
 
     def go_from_wall_to_node(self):
+        while self.step(self.timestep) != -1 and self.current_x <= 1.17:
+             self.get_gps_position()
+             print(f'Current X: {self.current_x}')
+             self.move_backward(7.0)    
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
         self.wait_for_sensors(10)
         time.sleep(1)
-        self.turn_left_90_degrees()
-        self.wait_for_sensors(10)
-        time.sleep(1)
-        self.turn_left_90_degrees()
+        self.turn_left_180_degrees()
         self.wait_for_sensors(10)
         time.sleep(1)
         while self.step(self.timestep) != -1 and self.current_x <= 2.32:
@@ -538,14 +701,134 @@ class RobotController(Robot):
         self.stop_movement()
         self.stop_robot()            
 
+    def go_from_node_to_wall(self):
+        self.get_gps_position()
+        time.sleep(0.5)
+        self.turn_left_180_degrees()
+        self.wait_for_sensors(10)
+        while self.step(self.timestep) != -1 and self.current_x>= 1.0:
+             self.get_gps_position()
+             print(f'Current X: {self.current_x}')
+             self.move_forward(self.max_velocity)    
+        self.stop_movement()
+        self.stop_robot()
+        # add corrections to positions
+        self.move_to_correct_x_position(0.53629)
+        self.wait_for_sensors(10)
+        self.move_to_correct_y_position(-0.127882)
+        self.wait_for_sensors(10)
+        time.sleep(1)
+
+    def return_from_red_and_blue_to_node(self):
+        self.wait_for_sensors(10)
+        self.get_gps_position()
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_x >= 2.32:
+            self.get_gps_position()
+            print(f'Current x: {self.current_x}')
+            self.move_backward(7.0)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_y >= 0.0:
+            self.get_gps_position()
+            print(f'Current Y: {self.current_y}')
+            self.move_right(7.0)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(100)
+        time.sleep(1)
+        
+    def return_from_green_and_yellow_to_node(self):
+        self.wait_for_sensors(10)
+        self.get_gps_position()
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_x >= 2.32:
+            self.get_gps_position()
+            print(f'Current x: {self.current_x}')
+            self.move_backward(7.0)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
+        while self.step(self.timestep) != -1 and self.current_y <= 0.0:
+            self.get_gps_position()
+            print(f'Current Y: {self.current_y}')
+            self.move_left(7.0)
+        self.stop_movement()
+        self.stop_robot()
+        self.wait_for_sensors(100)
+        time.sleep(1)
+        
+
+
 robot = RobotController()
-# robot.go_to_wall()
-# robot.print_color_queue()
-# msg = robot.receive_message()
-while robot.step(robot.timestep) != -1 :
-    msg = robot.receive_message()
-    if  msg != None:
-        robot.go_to_wall()
+robot.go_to_wall()
+robot.print_color_queue()
+robot.pick_from_wall()
+for color in robot.color_queue:
+    if color == 'Red':
+        print("\nThe Box will delivered Now To RED\n")
+        robot.go_from_wall_to_node()
+        robot.go_to_red()
+        time.sleep(1)
+        # check again
+        robot.get_gps_position()
+        robot.move_to_correct_x_position_Opposite(4.0)
+        robot.move_to_correct_y_position_Opposite(3.85)
+        robot.pick_up_form_basket()
+        robot.drop()
+        robot.return_from_red_and_blue_to_node()
+        robot.go_from_node_to_wall()
+
+
+    elif color == 'Blue':
+        print("\nThe Box will delivered Now To Blue\n")
+        robot.go_from_wall_to_node()
+        robot.go_to_blue()
+        time.sleep(1)
+        # check again
+        robot.get_gps_position()
+        robot.move_to_correct_x_position_Opposite(4.0)
+        robot.move_to_correct_y_position_Opposite(1.11463)
+        robot.pick_up_form_basket()
+        robot.drop()
+        robot.return_from_red_and_blue_to_node()
+        robot.go_from_node_to_wall()
+
+
+    elif color == 'yellow':
+        print("\nThe Box will delivered Now To Yellow\n")
+        robot.go_from_wall_to_node()
+        robot.go_to_yellow()
+        time.sleep(1)
+        # check again
+        robot.get_gps_position()
+        robot.pick_up_form_basket()
+        robot.move_to_correct_x_position_Opposite(4.0)
+        robot.move_to_correct_y_position_Opposite(-1.44427)
+        robot.drop()
+        robot.return_from_green_and_yellow_to_node()
+        robot.go_from_node_to_wall()
+    elif color == 'Green':
+        print("\nThe Box will delivered Now To Green \n")
+        robot.go_from_wall_to_node()
+        robot.go_to_green()
+        time.sleep(1)
+        # check again
+        robot.get_gps_position()
+        robot.move_to_correct_x_position_Opposite(4.0)
+        robot.move_to_correct_y_position_Opposite(-4.0)
+        robot.pick_up_form_basket()
+        robot.drop()
+        robot.return_from_green_and_yellow_to_node()
+        robot.go_from_node_to_wall()
+    else:
+        print('\nTheere is no Colors detect Bro\n')
+        break
+    
+
 
 
 

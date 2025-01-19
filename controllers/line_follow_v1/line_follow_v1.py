@@ -43,7 +43,9 @@ class RobotController(Robot):
         self.sensors_coefficient = [5000, 4500, 4000, 3000, 2000, 1000, -1000, -2000, -3000, -4000, -4500, -5000]
         
         # setup static / constant values
-        self.max_velocity = 14.81
+
+        # self.max_velocity = 14.81
+        self.max_velocity = 7.0
         self.movement_velocity = 4.0
         self.rotation_velocity = 2.0 
 
@@ -299,7 +301,6 @@ class RobotController(Robot):
         target_angle = (current_angle + 180) % 360
         self.rotate_to_target_angle(target_angle)
 
-
     def turn_right_90_degrees(self):
         current_angle = self.get_current_angle()
         target_angle = (current_angle - 90 + 360) % 360
@@ -488,7 +489,7 @@ class RobotController(Robot):
             while self.step(self.timestep) != -1 and self.current_y < 3.70:
                 self.get_gps_position()
                 print(f'Current Y: {self.current_y}')
-                self.move_right(self.max_velocity)
+                self.move_right(7.0)
             self.stop_movement()
             self.stop_robot()
             self.wait_for_sensors(10)
@@ -501,7 +502,7 @@ class RobotController(Robot):
         while self.step(self.timestep) != -1 and self.current_y < 1.14:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_right(self.max_velocity)
+            self.move_right(7.0)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -514,7 +515,7 @@ class RobotController(Robot):
         while self.step(self.timestep) != -1 and self.current_y > -1.45:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_left(self.max_velocity)
+            self.move_left(7.0)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -527,7 +528,7 @@ class RobotController(Robot):
         while self.step(self.timestep) != -1 and self.current_y > -4.0:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_left(self.max_velocity)
+            self.move_left(7.0)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -596,7 +597,7 @@ class RobotController(Robot):
         while self.step(self.timestep) != -1 and self.current_x <-2.45:
             self.get_gps_position()
             print(f'Current x: {self.current_x}')
-            self.move_backward(self.max_velocity)
+            self.move_backward(7.0)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -604,7 +605,7 @@ class RobotController(Robot):
         while self.step(self.timestep) != -1 and self.current_y <= 0.0:
             self.get_gps_position()
             print(f'Current Y: {self.current_y}')
-            self.move_right(self.max_velocity)
+            self.move_right(7.0)
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -627,10 +628,12 @@ class RobotController(Robot):
         self.wait_for_sensors(10)
 
     def return_from_wall_to_node(self):
+        self.wait_for_sensors(10)
+        time.sleep(0.5)
         while self.step(self.timestep) != -1 and self.current_x >=-1.17:
              self.get_gps_position()
              print(f'Current X: {self.current_x}')
-             self.move_backward(self.max_velocity)    
+             self.move_backward(7.0)    
         self.stop_movement()
         self.stop_robot()
         self.wait_for_sensors(10)
@@ -761,12 +764,8 @@ class RobotController(Robot):
 
     def go_from_node_to_wall(self):
         self.get_gps_position()
-        time.sleep(0.5)
         self.wait_for_sensors(10)
-        self.turn_right_90_degrees()
-        time.sleep(0.5)
-        self.wait_for_sensors(10)
-        self.turn_right_90_degrees()
+        self.turn_left_180_degrees()
         time.sleep(0.5)
         self.wait_for_sensors(10)
         while self.step(self.timestep) != -1 and self.current_x < -0.55:
@@ -784,63 +783,63 @@ class RobotController(Robot):
 
 
 robot = RobotController()
-# robot.pick_up_form_basket()
-robot.start()
-robot.print_color_queue()
+# # robot.pick_up_form_basket()
+# robot.start()
+# robot.print_color_queue()
 
-for color in robot.color_queue:
-    if color == 'Red':
-        print("\nThe Color Is Now RED\n")
-        robot.go_to_red()
-        time.sleep(1)
-        # check again
-        robot.get_gps_position()
-        robot.move_to_position(target_x = -3.30, target_y = 3.76234)
-        robot.pick_up()
-        robot.return_from_red_to_node()
-        robot.go_from_node_to_wall()
-        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-        robot.pick_up_form_basket()
-        robot.return_from_wall_to_node()
+# for color in robot.color_queue:
+#     if color == 'Red':
+#         print("\nThe Color Is Now RED\n")
+#         robot.go_to_red()
+#         time.sleep(1)
+#         # check again
+#         robot.get_gps_position()
+#         robot.move_to_position(target_x = -3.30, target_y = 3.76234)
+#         robot.pick_up()
+#         robot.return_from_red_to_node()
+#         robot.go_from_node_to_wall()
+#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+#         robot.pick_up_form_basket()
+#         robot.return_from_wall_to_node()
 
-    elif color == 'Blue':
-        print("\nThe Color Is Now Blue\n")
-        robot.go_to_blue()
-        time.sleep(1)
-        robot.get_gps_position()
-        robot.move_to_position(target_x = -3.30, target_y = 1.25)
-        robot.pick_up()
-        robot.return_from_blue_to_node()
-        robot.go_from_node_to_wall()
-        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-        robot.pick_up_form_basket()
-        robot.return_from_wall_to_node()
-    elif color == 'Green':
-        print("\nThe Color Is Now Green \n")
-        robot.go_to_green()
-        time.sleep(1)
-        robot.get_gps_position()
-        robot.move_to_position(target_x = -3.305, target_y = -4.07)
-        robot.pick_green_and_retrun_to_node()
-        robot.go_from_node_to_wall()
-        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-        robot.pick_up_form_basket()
-        robot.return_from_wall_to_node()
+#     elif color == 'Blue':
+#         print("\nThe Color Is Now Blue\n")
+#         robot.go_to_blue()
+#         time.sleep(1)
+#         robot.get_gps_position()
+#         robot.move_to_position(target_x = -3.30, target_y = 1.25)
+#         robot.pick_up()
+#         robot.return_from_blue_to_node()
+#         robot.go_from_node_to_wall()
+#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+#         robot.pick_up_form_basket()
+#         robot.return_from_wall_to_node()
+#     elif color == 'Green':
+#         print("\nThe Color Is Now Green \n")
+#         robot.go_to_green()
+#         time.sleep(1)
+#         robot.get_gps_position()
+#         robot.move_to_position(target_x = -3.305, target_y = -4.07)
+#         robot.pick_green_and_retrun_to_node()
+#         robot.go_from_node_to_wall()
+#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+#         robot.pick_up_form_basket()
+#         robot.return_from_wall_to_node()
 
-    elif color == 'Yellow':
-        print("\nThe Color Is Now Yellow \n")
-        robot.go_to_yellow()
-        robot.get_gps_position()
-        robot.move_to_position(target_x = -3.31, target_y = -1.46)
-        robot.pick_up()
-        robot.return_from_yellow_to_node()
-        robot.go_from_node_to_wall()
-        robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-        robot.pick_up_form_basket()
-        robot.return_from_wall_to_node()
-    else:
-        print('\nTheere is no Colors detect Bro\n')
-        break
+#     elif color == 'Yellow':
+#         print("\nThe Color Is Now Yellow \n")
+#         robot.go_to_yellow()
+#         robot.get_gps_position()
+#         robot.move_to_position(target_x = -3.31, target_y = -1.46)
+#         robot.pick_up()
+#         robot.return_from_yellow_to_node()
+#         robot.go_from_node_to_wall()
+#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+#         robot.pick_up_form_basket()
+#         robot.return_from_wall_to_node()
+#     else:
+#         print('\nTheere is no Colors detect Bro\n')
+#         break
     
 
 
