@@ -1,4 +1,4 @@
-from controller import Robot, Camera , Emitter
+from controller import Robot, Camera , Emitter, Receiver
 import math
 import time 
 import struct
@@ -119,13 +119,28 @@ class RobotController(Robot):
         # Enable Compass
         self.compass.enable(self.timestep)
 
+        # define the emitter
         self.emitter = self.getDevice('emitter')
         self.cube = 100
-        
+
+        # define the receiver 
+        self.receiver = self.getDevice('receiver') 
+        self.receiver.enable(self.timestep)
 
     def send_boolean(self, value):
         self.emitter.send(struct.pack('i', value))
         print(" SEND !!")
+
+    def receive_message(self):
+        if self.receiver.getQueueLength() > 0:
+            message = self.receiver.getString()  
+            self.receiver.nextPacket()  
+            try:
+                # value = float(message)  
+               return message  
+            except ValueError:
+               message = 'Received data is not a valid number.'
+               return message
 
     def clamp_speed(self, speed):
         return max(min(speed, self.max_velocity), -self.max_velocity)
@@ -673,7 +688,7 @@ class RobotController(Robot):
         self.step(100 * self.timestep)
         # down the hand a little to be able to catch the Box
         self.armMotors[1].setPosition(-0.30)
-        self.armMotors[3].setPosition(-1.32)
+        self.armMotors[3].setPosition(-1.30)
         self.step(100 * self.timestep)
         # Catch the Box
         self.finger1.setPosition(0.012)  
@@ -783,64 +798,75 @@ class RobotController(Robot):
 
 
 robot = RobotController()
-# # robot.pick_up_form_basket()
-# robot.start()
-# robot.print_color_queue()
-
-# for color in robot.color_queue:
-#     if color == 'Red':
-#         print("\nThe Color Is Now RED\n")
-#         robot.go_to_red()
-#         time.sleep(1)
-#         # check again
-#         robot.get_gps_position()
-#         robot.move_to_position(target_x = -3.30, target_y = 3.76234)
-#         robot.pick_up()
-#         robot.return_from_red_to_node()
-#         robot.go_from_node_to_wall()
-#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-#         robot.pick_up_form_basket()
-#         robot.return_from_wall_to_node()
-
-#     elif color == 'Blue':
-#         print("\nThe Color Is Now Blue\n")
-#         robot.go_to_blue()
-#         time.sleep(1)
-#         robot.get_gps_position()
-#         robot.move_to_position(target_x = -3.30, target_y = 1.25)
-#         robot.pick_up()
-#         robot.return_from_blue_to_node()
-#         robot.go_from_node_to_wall()
-#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-#         robot.pick_up_form_basket()
-#         robot.return_from_wall_to_node()
-#     elif color == 'Green':
-#         print("\nThe Color Is Now Green \n")
-#         robot.go_to_green()
-#         time.sleep(1)
-#         robot.get_gps_position()
-#         robot.move_to_position(target_x = -3.305, target_y = -4.07)
-#         robot.pick_green_and_retrun_to_node()
-#         robot.go_from_node_to_wall()
-#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-#         robot.pick_up_form_basket()
-#         robot.return_from_wall_to_node()
-
-#     elif color == 'Yellow':
-#         print("\nThe Color Is Now Yellow \n")
-#         robot.go_to_yellow()
-#         robot.get_gps_position()
-#         robot.move_to_position(target_x = -3.31, target_y = -1.46)
-#         robot.pick_up()
-#         robot.return_from_yellow_to_node()
-#         robot.go_from_node_to_wall()
-#         robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
-#         robot.pick_up_form_basket()
-#         robot.return_from_wall_to_node()
-#     else:
-#         print('\nTheere is no Colors detect Bro\n')
-#         break
-    
+# robot.pick_up_form_basket()
+robot.start()
+robot.print_color_queue()
+while True:
+    for color in robot.color_queue:
+        if color == 'Red':
+            print("\nThe Color Is Now RED\n")
+            robot.go_to_red()
+            time.sleep(1)
+            # check again
+            robot.get_gps_position()
+            robot.move_to_position(target_x = -3.30, target_y = 3.76234)
+            robot.pick_up()
+            robot.return_from_red_to_node()
+            robot.go_from_node_to_wall()
+            robot.move_to_correct_y_position_Opposite(target_y= -0.15)
+            robot.pick_up_form_basket()
+            while robot.receive_message() == None :  # انتظار إشارة من روبوت 2
+                robot.step(robot.timestep)
+            robot.return_from_wall_to_node()
 
 
-    
+        elif color == 'Blue':
+            print("\nThe Color Is Now Blue\n")
+            robot.go_to_blue()
+            time.sleep(1)
+            robot.get_gps_position()
+            robot.move_to_position(target_x = -3.30, target_y = 1.25)
+            robot.pick_up()
+            robot.return_from_blue_to_node()
+            robot.go_from_node_to_wall()
+            robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+            robot.pick_up_form_basket()
+            while robot.receive_message() == None :  # انتظار إشارة من روبوت 2
+                robot.step(robot.timestep)
+            robot.return_from_wall_to_node()
+
+        elif color == 'Green':
+            print("\nThe Color Is Now Green \n")
+            robot.go_to_green()
+            time.sleep(1)
+            robot.get_gps_position()
+            robot.move_to_position(target_x = -3.305, target_y = -4.07)
+            robot.pick_green_and_retrun_to_node()
+            robot.go_from_node_to_wall()
+            robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+            robot.pick_up_form_basket()
+            while robot.receive_message() == None :  # انتظار إشارة من روبوت 2
+                robot.step(robot.timestep)
+            robot.return_from_wall_to_node()
+
+
+        elif color == 'Yellow':
+            print("\nThe Color Is Now Yellow \n")
+            robot.go_to_yellow()
+            robot.get_gps_position()
+            robot.move_to_position(target_x = -3.31, target_y = -1.46)
+            robot.pick_up()
+            robot.return_from_yellow_to_node()
+            robot.go_from_node_to_wall()
+            robot.move_to_correct_y_position_Opposite(target_y= -0.132864)
+            robot.pick_up_form_basket()
+            while robot.receive_message() == None :  # انتظار إشارة من روبوت 2
+                robot.step(robot.timestep)
+            robot.return_from_wall_to_node()
+        else:
+            print('\nTheere is no Colors detect Bro\n')
+            break
+        
+
+
+        

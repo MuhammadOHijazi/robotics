@@ -1,4 +1,4 @@
-from controller import Robot, Camera, Receiver
+from controller import Robot, Camera, Receiver, Emitter
 import math
 import time
 import struct
@@ -130,9 +130,20 @@ class RobotController(Robot):
         # Enable Compass
         self.compass.enable(self.timestep)
 
+        # define the receiver 
         self.receiver = self.getDevice('receiver') 
         self.receiver.enable(self.timestep)
+        
+        # define the emitter
+        self.emitter = self.getDevice('emitter')
+        self.cube = 100
 
+    
+    def send_boolean(self, value):
+        self.emitter.send(struct.pack('i', value))
+        print(" SEND !!")
+
+    
     def receive_message(self):
         if self.receiver.getQueueLength() > 0:
             message = self.receiver.getString()  
@@ -594,6 +605,10 @@ class RobotController(Robot):
             self.finger2.setPosition(self.fingerMaxPosition)
             self.step(50 * self.timestep)  
             self.hand_up()
+            self.step(50 * self.timestep)  
+            self.send_boolean(self.cube)
+            time.sleep(1)
+            
 
     def go_to_wall(self):
         time.sleep(1)
@@ -621,7 +636,7 @@ class RobotController(Robot):
         self.get_gps_position()
         time.sleep(0.5)
         self.wait_for_sensors(10)
-        self.move_to_position(target_x=0.53, target_y=-0.127882)
+        self.move_to_position(target_x=0.51, target_y=-0.17)
         self.wait_for_sensors(10)
         time.sleep(0.5)
     
@@ -630,9 +645,8 @@ class RobotController(Robot):
         self.finger1.setPosition(self.fingerMaxPosition)
         self.finger2.setPosition(self.fingerMaxPosition)
         self.step(100 * self.timestep)
-        self.armMotors[1].setPosition(-0.05)
-        self.armMotors[2].setPosition(-0.90)
-        self.armMotors[3].setPosition(-0.90)
+        self.armMotors[2].setPosition(-1.10)
+        self.armMotors[3].setPosition(-1.10)
         self.step(100 * self.timestep)
         self.finger1.setPosition(0.010)
         self.finger2.setPosition(0.010)
@@ -655,11 +669,11 @@ class RobotController(Robot):
         self.step(100 * self.timestep)
         # down the hand a little to be able to catch the Box
         self.armMotors[1].setPosition(-0.30)
-        self.armMotors[3].setPosition(-1.15)
+        self.armMotors[3].setPosition(-1.30)
         self.step(100 * self.timestep)
         # Catch the Box
-        self.finger1.setPosition(0.012)  
-        self.finger2.setPosition(0.012)
+        self.finger1.setPosition(0.013)  
+        self.finger2.setPosition(0.013)
         self.step(100 * self.timestep)
         # Get the Hand to Up 
         self.hand_up()
@@ -764,76 +778,81 @@ class RobotController(Robot):
 
 
 robot = RobotController()
-robot.go_to_wall()
 robot.print_color_queue()
-robot.pick_from_wall()
-for color in robot.color_queue:
-    if color == 'Red':
-        print("\nThe Box will delivered Now To RED\n")
-        robot.go_from_wall_to_node()
-        robot.go_to_red()
-        time.sleep(1)
-        # check again
-        robot.get_gps_position()
-        robot.move_to_correct_x_position_Opposite(4.0)
-        robot.move_to_correct_y_position_Opposite(3.85)
-        robot.pick_up_form_basket()
-        robot.drop()
-        robot.return_from_red_and_blue_to_node()
-        robot.go_from_node_to_wall()
+while True:
+    msg = robot.receive_message()
+    while robot.receive_message() == None:
+        robot.step(robot.timestep)
+    robot.go_to_wall()
+    robot.pick_from_wall()
+    for color in robot.color_queue:
+        if color == 'Red':
+            print("\nThe Box will delivered Now To RED\n")
+            robot.go_from_wall_to_node()
+            robot.go_to_red()
+            time.sleep(1)
+            # check again
+            robot.get_gps_position()
+            robot.move_to_correct_x_position_Opposite(4.0)
+            robot.move_to_correct_y_position_Opposite(3.85)
+            robot.pick_up_form_basket()
+            robot.drop()
+            robot.return_from_red_and_blue_to_node()
+            robot.go_from_node_to_wall()
+            robot.color_queue.pop(color)
+            break
+        elif color == 'Blue':
+            print("\nThe Box will delivered Now To Blue\n")
+            robot.go_from_wall_to_node()
+            robot.go_to_blue()
+            time.sleep(1)
+            # check again
+            robot.get_gps_position()
+            robot.move_to_correct_x_position_Opposite(4.0)
+            robot.move_to_correct_y_position_Opposite(1.11463)
+            robot.pick_up_form_basket()
+            robot.drop()
+            robot.return_from_red_and_blue_to_node()
+            robot.go_from_node_to_wall()
+            robot.color_queue.pop(color)
+            
+        elif color == 'yellow':
+            print("\nThe Box will delivered Now To Yellow\n")
+            robot.go_from_wall_to_node()
+            robot.go_to_yellow()
+            time.sleep(1)
+            # check again
+            robot.get_gps_position()
+            robot.pick_up_form_basket()
+            robot.move_to_correct_x_position_Opposite(4.0)
+            robot.move_to_correct_y_position_Opposite(-1.44427)
+            robot.drop()
+            robot.return_from_green_and_yellow_to_node()
+            robot.go_from_node_to_wall()
+            robot.color_queue.pop(color)
+            break
+        elif color == 'Green':
+            print("\nThe Box will delivered Now To Green \n")
+            robot.go_from_wall_to_node()
+            robot.go_to_green()
+            time.sleep(1)
+            # check again
+            robot.get_gps_position()
+            robot.move_to_correct_x_position_Opposite(4.0)
+            robot.move_to_correct_y_position_Opposite(-4.0)
+            robot.pick_up_form_basket()
+            robot.drop()
+            robot.return_from_green_and_yellow_to_node()
+            robot.go_from_node_to_wall()
+            robot.color_queue.pop(color)
+        else:
+            print('\nTheere is no Colors detect Bro\n')
 
 
-    elif color == 'Blue':
-        print("\nThe Box will delivered Now To Blue\n")
-        robot.go_from_wall_to_node()
-        robot.go_to_blue()
-        time.sleep(1)
-        # check again
-        robot.get_gps_position()
-        robot.move_to_correct_x_position_Opposite(4.0)
-        robot.move_to_correct_y_position_Opposite(1.11463)
-        robot.pick_up_form_basket()
-        robot.drop()
-        robot.return_from_red_and_blue_to_node()
-        robot.go_from_node_to_wall()
-
-
-    elif color == 'yellow':
-        print("\nThe Box will delivered Now To Yellow\n")
-        robot.go_from_wall_to_node()
-        robot.go_to_yellow()
-        time.sleep(1)
-        # check again
-        robot.get_gps_position()
-        robot.pick_up_form_basket()
-        robot.move_to_correct_x_position_Opposite(4.0)
-        robot.move_to_correct_y_position_Opposite(-1.44427)
-        robot.drop()
-        robot.return_from_green_and_yellow_to_node()
-        robot.go_from_node_to_wall()
-    elif color == 'Green':
-        print("\nThe Box will delivered Now To Green \n")
-        robot.go_from_wall_to_node()
-        robot.go_to_green()
-        time.sleep(1)
-        # check again
-        robot.get_gps_position()
-        robot.move_to_correct_x_position_Opposite(4.0)
-        robot.move_to_correct_y_position_Opposite(-4.0)
-        robot.pick_up_form_basket()
-        robot.drop()
-        robot.return_from_green_and_yellow_to_node()
-        robot.go_from_node_to_wall()
-    else:
-        print('\nTheere is no Colors detect Bro\n')
-        break
-    
 
 
 
 
 
 
-
-
-    
+        
