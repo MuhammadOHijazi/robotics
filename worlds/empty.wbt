@@ -9,6 +9,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Roughcast.proto"
 
 WorldInfo {
+  basicTimeStep 64
   contactProperties [
     ContactProperties {
       material1 "InteriorWheelMat"
@@ -35,8 +36,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.26022129001255223 0.25172481507968003 0.9321585153273578 1.6481545964580204
-  position -0.017938246131149027 -5.9083441019090115 2.876205315382407
+  orientation -0.13130279618917934 0.10996832356344119 0.9852241082746347 1.7099544590342273
+  position -1.629206282803361 -7.4442759644888 2.4043101969613194
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
